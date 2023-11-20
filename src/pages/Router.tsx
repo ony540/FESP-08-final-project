@@ -1,10 +1,6 @@
 import { createBrowserRouter, type RouteObject } from 'react-router-dom'
 import { ErrorComponent } from '../components'
-import { Layout } from './'
-import { MainPage } from './MainPage'
-import { DetailPage } from './DetailPage'
-
-//페이지 정보를 담고있는 객체를 반환하는 함수.
+import { Layout, MainPage, DetailPage } from '@pages/index'
 
 const generateRoute = (
   path: any,
