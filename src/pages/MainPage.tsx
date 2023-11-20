@@ -1,9 +1,10 @@
-import { MainHeader } from '../components/main'
+import { MainContent, MainHeader } from '@components/main'
 
 export const MainPage = () => {
   return (
     <>
       <MainHeader />
+      <MainContent />
     </>
   )
 }
