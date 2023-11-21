@@ -1,10 +1,13 @@
-import { MainContent, MainHeader } from '@components/main'
+import { CommonFooter, CommonHeader } from '@components/common'
+import { MainContent, MainThumbnail } from '@components/main'
 
 export const MainPage = () => {
   return (
     <>
-      <MainHeader />
+      <CommonHeader />
+      <MainThumbnail />
       <MainContent />
+      <CommonFooter />
     </>
   )
 }
