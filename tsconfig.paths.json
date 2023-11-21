@@ -8,8 +8,20 @@
       "@components": ["./components/index.ts"],
       "@components/*": ["./components/*"],
 
+      "@constants": ["./constants/index.ts"],
+      "@constants/*": ["./constants/*"],
+
       "@hooks": ["./hooks/index.ts"],
-      "@hooks/*": ["./hooks/*"]
+      "@hooks/*": ["./hooks/*"],
+
+      "@styles": ["./styles/index.ts"],
+      "@styles/*": ["./styles/*"],
+
+      "@types": ["./types/index.ts"],
+      "@types/*": ["./types/*"],
+
+      "@common": ["./components/common/index.ts"],
+      "@common/*": ["/components/common/*"]
     }
   }
 }
