@@ -1,6 +1,6 @@
 import { createBrowserRouter, type RouteObject } from 'react-router-dom'
-import { ErrorComponent } from '../components'
 import { Layout, MainPage, DetailPage } from '@pages/index'
+import { ErrorComponent } from '@components'
 
 const generateRoute = (
   path: any,
@@ -11,7 +11,12 @@ const generateRoute = (
     path: path,
     element: component,
     errorElement: <ErrorComponent />,
-    children: children
+    children: children,
+    loader: async () => {
+      const res = await fetch('/videos/popular.json')
+      const json = await res.json()
+      return json.items
+    }
   }
 }
 
@@ -19,11 +24,12 @@ export const routes = [
   {
     path: '/',
     element: <Layout />,
-    ErrorComponent: <ErrorComponent />,
+    errorComponent: <ErrorComponent />,
     children: [
       generateRoute('/', <MainPage />),
-      generateRoute('/detail:id', <DetailPage />)
-    ]
+      generateRoute('/detail/:id', <DetailPage />)
+    ],
+    errorElement: <ErrorComponent />
   }
 ]
 

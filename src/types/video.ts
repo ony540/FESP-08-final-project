@@ -59,3 +59,8 @@ export interface VideoListResponse {
     totalResults: number
   }
 }
+
+export interface ThumbnailImg {
+  $image?: string
+  $height?: number
+}
