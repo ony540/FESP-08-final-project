@@ -10,7 +10,7 @@ interface Truthy {
   $isTrue: boolean
 }
 
-export const CommonHeader = ({ preLoadData }: { preLoadData: VideoItem }) => {
+export const CommonHeader = ({ preLoadData }: { preLoadData?: VideoItem }) => {
   const [isSearch, setIsSearch] = useState(false)
   const naviagate = useNavigate()
   const inputRef = useRef<HTMLInputElement>(null)
