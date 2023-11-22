@@ -24,11 +24,11 @@ export const routes = [
   {
     path: '/',
     element: <Layout />,
-    errorComponent: <ErrorComponent />,
     children: [
       generateRoute('/', <MainPage />),
       generateRoute('/detail/:id', <DetailPage />)
-    ]
+    ],
+    errorElement: <ErrorComponent />
   }
 ]
 

@@ -1,19 +1,26 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import styled, { keyframes } from 'styled-components'
 import { CommonLogo } from './CommonLogo'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { CommonSearch } from './CommonSearch'
 import { useEffect, useRef, useState } from 'react'
 import { CommonXBtn } from './CommonXBtn'
-import { VideoItem } from '@types'
 
 interface Truthy {
   $isTrue: boolean
 }
 
-export const CommonHeader = ({ preLoadData }: { preLoadData?: VideoItem }) => {
+export const CommonHeader = ({
+  handleSearch,
+  preLoadData
+}: {
+  handleSearch?: any
+  preLoadData?: any
+}) => {
   const [isSearch, setIsSearch] = useState(false)
   const naviagate = useNavigate()
   const inputRef = useRef<HTMLInputElement>(null)
+  const location = useLocation()
 
   const moveToMain = () => {
     naviagate('/')
@@ -21,40 +28,50 @@ export const CommonHeader = ({ preLoadData }: { preLoadData?: VideoItem }) => {
 
   const handleClickSearch = () => {
     setIsSearch(!isSearch)
+    handleSearch('')
   }
 
   useEffect(() => {
     inputRef.current?.focus()
   }, [isSearch])
 
+  // const renderHeader = () => {}
+
   return (
-    <HeaderContainer>
-      {/* 메인 아이콘 */}
-      <LogoIconWrapper onClick={moveToMain}>
-        <CommonLogo
-          width={130}
-          height={50}
-        />
-      </LogoIconWrapper>
-
-      {/* 검색 아이콘 */}
-
-      {isSearch ? (
-        <SearchBarWrapper>
-          <StyledInput
-            ref={inputRef}
-            $isTrue={isSearch}
+    <>
+      <HeaderContainer>
+        {/* 메인 아이콘 */}
+        <LogoIconWrapper onClick={moveToMain}>
+          <CommonLogo
+            width={130}
+            height={50}
           />
-          <SearchBarXWrapper onClick={handleClickSearch}>
-            <CommonXBtn />
-          </SearchBarXWrapper>
-        </SearchBarWrapper>
-      ) : (
-        <SearchIconWrapper onClick={handleClickSearch}>
-          <CommonSearch />
-        </SearchIconWrapper>
-      )}
-    </HeaderContainer>
+        </LogoIconWrapper>
+
+        {/* 검색 아이콘 */}
+        {location.pathname === '/' && (
+          <>
+            {isSearch ? (
+              <SearchBarWrapper>
+                <StyledInput
+                  maxLength={30}
+                  ref={inputRef}
+                  $isTrue={isSearch}
+                  onChange={e => handleSearch(e.target.value)}
+                />
+                <SearchBarXWrapper onClick={handleClickSearch}>
+                  <CommonXBtn />
+                </SearchBarXWrapper>
+              </SearchBarWrapper>
+            ) : (
+              <SearchIconWrapper onClick={handleClickSearch}>
+                <CommonSearch />
+              </SearchIconWrapper>
+            )}
+          </>
+        )}
+      </HeaderContainer>
+    </>
   )
 }
 

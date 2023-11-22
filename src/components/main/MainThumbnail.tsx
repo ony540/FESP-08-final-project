@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react/prop-types */
 import { VideoItem } from '@types'
 import styled from 'styled-components'
@@ -12,14 +13,20 @@ interface Slide {
   $height?: number
 }
 
+interface SearchProps {
+  $search?: any
+}
+
 const getRandomItems = (array: any[], count: number) => {
   return array.sort(() => 0.5 - Math.random()).slice(0, count)
 }
 
 export const MainThumbnail = ({
-  preLoadData
+  preLoadData,
+  search
 }: {
   preLoadData: VideoItem[]
+  search?: string[]
 }) => {
   const navigate = useNavigate()
 
@@ -49,27 +56,29 @@ export const MainThumbnail = ({
   }
 
   return (
-    <Wrap>
-      <Slider {...settings}>
-        {randomItems &&
-          randomItems.map((item, index) => (
-            <div key={index}>
-              <ThumbnailBoxImg
-                $height={item.snippet.thumbnails.maxres.height / 1.5}
-                $image={item.snippet.thumbnails.maxres.url}>
-                <PlayBtnBox onClick={() => handlePlayButtonClick(item.id)}>
-                  <CommonPlayLogo />
-                  <PlayBtnText>Play Now</PlayBtnText>
-                </PlayBtnBox>
-              </ThumbnailBoxImg>
-            </div>
-          ))}
-        <CustomPrev />
-      </Slider>
-    </Wrap>
+    <>
+      <Wrap>
+        <Slider {...settings}>
+          {randomItems &&
+            randomItems.map((item, index) => (
+              <div key={index}>
+                <ThumbnailBoxImg
+                  $height={item.snippet.thumbnails.maxres.height / 1.5}
+                  $image={item.snippet.thumbnails.maxres.url}>
+                  <PlayBtnBox onClick={() => handlePlayButtonClick(item.id)}>
+                    <CommonPlayLogo />
+                    <PlayBtnText>Play Now</PlayBtnText>
+                  </PlayBtnBox>
+                </ThumbnailBoxImg>
+              </div>
+            ))}
+          <CustomPrev />
+        </Slider>
+      </Wrap>
+    </>
   )
 }
-const Wrap = styled.div`
+const Wrap = styled.div<SearchProps>`
   margin: 0 auto;
   max-width: calc(100% -100px);
 `
@@ -132,32 +141,6 @@ const Prev = styled.button`
   font-weight: bold;
 `
 
-// 수정본
-// const Prev = styled.button`
-//   position: absolute;
-//   top: 0;
-//   left: 0;
-//   z-index: 1;
-//   background: rgba(255, 255, 255, 0.01);
-//   width: 80px;
-//   height: 100%;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   font-size: 28px;
-
-//   &:hover {
-//     opacity: 1;
-//     visibility: visible;
-//     background: rgba(255, 255, 255, 0.05);
-//     backdrop-filter: blur(5px);
-//     border-radius: 8px 0 0 8px;
-//     box-shadow:
-//       0 3px 6px rgba(0, 0, 0, 0.23),
-//       0 3px 6px rgba(0, 0, 0, 0.16);
-//   }
-// `
-
 // 기존
 const Next = styled.button`
   position: absolute;
@@ -176,29 +159,3 @@ const Next = styled.button`
   font-size: 28px;
   font-weight: bold;
 `
-
-// 수정본
-// const Next = styled.button`
-//   position: absolute;
-//   top: 0;
-//   right: 0;
-//   z-index: 1;
-//   background: rgba(255, 255, 255, 0.01);
-//   width: 80px;
-//   height: 100%;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-//   font-size: 28px;
-
-//   &:hover {
-//     opacity: 1;
-//     visibility: visible;
-//     background: rgba(255, 255, 255, 0.05);
-//     backdrop-filter: blur(5px);
-//     border-radius: 0 8px 8px 0;
-//     box-shadow:
-//       0 3px 6px rgba(0, 0, 0, 0.16),
-//       0 3px 6px rgba(0, 0, 0, 0.23);
-//   }
-// `

@@ -23,6 +23,9 @@
       "@common": ["./components/common/index.ts"],
       "@common/*": ["/components/common/*"],
 
+      "@search": ["./components/search/index.ts"],
+      "@search/*": ["/components/search/*"],
+
       "@utils": ["./utils/index.ts"],
       "@utils/*": ["/utils/*"]
     }
