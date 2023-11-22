@@ -5,9 +5,7 @@ export const Layout = () => {
   return (
     <>
       <GlobalStyles />
-      <div>
-        <Outlet />
-      </div>
+      <Outlet />
     </>
   )
 }

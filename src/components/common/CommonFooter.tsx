@@ -4,6 +4,25 @@ import { CommonSocial } from './CommonSocial'
 import { FOOTER_TEXT } from '@constants'
 
 export const CommonFooter = () => {
+  const renderRowText = () => {
+    return (
+      <FlexRow>
+        {[FOOTER_TEXT.ROW_TEXT.slice(0, 3), FOOTER_TEXT.ROW_TEXT.slice(3)].map(
+          (row, rowIndex) => (
+            <FlexRowText key={rowIndex}>
+              {row.map((text, idx) => (
+                <div key={idx}>
+                  <>{text}</>
+                </div>
+              ))}
+              {rowIndex === 1 && <CommonSocial width={70} />}
+            </FlexRowText>
+          )
+        )}
+      </FlexRow>
+    )
+  }
+
   return (
     <>
       <StyledHrLine />
@@ -12,25 +31,7 @@ export const CommonFooter = () => {
           width={130}
           height={100}
         />
-        {/* {renderFooterText()} */}
-        <FlexRow>
-          <FlexRowText>
-            {FOOTER_TEXT.ROW_TEXT.slice(0, 3).map((i: any, idx: any) => (
-              <div key={idx}>
-                <>{i}</>
-              </div>
-            ))}
-          </FlexRowText>
-          <FlexRowText>
-            {FOOTER_TEXT.ROW_TEXT.slice(3).map((i: any, idx: any) => (
-              <div key={idx}>
-                <>{i}</>
-              </div>
-            ))}
-            <CommonSocial width={70} />
-          </FlexRowText>
-        </FlexRow>
-
+        {renderRowText()}
         <YearText> {FOOTER_TEXT.COLUMN_TEXT}</YearText>
       </FooterContainer>
     </>

@@ -1,8 +1,12 @@
 import styled from 'styled-components'
 
 export const CommonScrollAnchor = () => {
+  const moveToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
   return (
-    <StyledAnchor>
+    <StyledAnchor onClick={moveToTop}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="32"
