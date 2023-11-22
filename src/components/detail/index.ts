@@ -1,2 +1,2 @@
-export * from './DetailHeader'
-export * from './DetailContent'
+export * from './DetailMainContent'
+export * from './DetailRelatedList'
