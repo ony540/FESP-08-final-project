@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-
 import { CommonLogoProps } from '@types'
 
 export const CommonLogo: React.FC<CommonLogoProps> = ({ width, height }) => {
