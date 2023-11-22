@@ -27,9 +27,8 @@ export const routes = [
     errorComponent: <ErrorComponent />,
     children: [
       generateRoute('/', <MainPage />),
-      generateRoute('/detail/:id', <DetailPage />
-    ],
-    errorElement: <ErrorComponent />
+      generateRoute('/detail/:id', <DetailPage />)
+    ]
   }
 ]
 

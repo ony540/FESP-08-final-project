@@ -2,11 +2,13 @@ import { DetailMainContent, DetailRelatedList } from '@components'
 import { CommonFooter, CommonHeader } from '@components/common'
 import { RelatedVideoItem, VideoItem } from '@types'
 import { useEffect, useLayoutEffect, useState } from 'react'
-import { useLocation, useParams } from 'react-router-dom'
+import { useLoaderData, useLocation, useParams } from 'react-router-dom'
 
 export const DetailPage = () => {
   const param = useParams()
   const id: string = param.id as string
+  const preLoadData: any = useLoaderData()
+
   const { state } = useLocation()
   const [detailData, setDetailData] = useState<VideoItem | null>(null)
   const [relatedData, setRelatedData] = useState<RelatedVideoItem[] | null>(
@@ -15,18 +17,10 @@ export const DetailPage = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      let filteredData
+      const filteredData = state
+        ? state
+        : preLoadData.find((item: VideoItem) => item.id === id)
 
-      if (state) {
-        filteredData = state
-      } else {
-        const detailJson = await fetch('/videos/popular.json').then(res =>
-          res.json()
-        )
-        filteredData = detailJson.items.find(
-          (item: VideoItem) => item.id === id
-        )
-      }
       setDetailData(filteredData)
 
       const relatedJson = await fetch(
