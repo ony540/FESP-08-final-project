@@ -14,13 +14,24 @@ export const CommonFooter = () => {
         />
         {/* {renderFooterText()} */}
         <FlexRow>
-          {FOOTER_TEXT.map((i: any, idx: any) => (
-            <>
-              <div key={idx}>{i}</div> |
-            </>
-          ))}
-          <CommonSocial width={70} />
+          <FlexRowText>
+            {FOOTER_TEXT.ROW_TEXT.slice(0, 3).map((i: any, idx: any) => (
+              <div key={idx}>
+                <>{i}</>
+              </div>
+            ))}
+          </FlexRowText>
+          <FlexRowText>
+            {FOOTER_TEXT.ROW_TEXT.slice(3).map((i: any, idx: any) => (
+              <div key={idx}>
+                <>{i}</>
+              </div>
+            ))}
+            <CommonSocial width={70} />
+          </FlexRowText>
         </FlexRow>
+
+        <YearText> {FOOTER_TEXT.COLUMN_TEXT}</YearText>
       </FooterContainer>
     </>
   )
@@ -30,18 +41,52 @@ const FooterContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  bottom: 0;
 `
 
 const StyledHrLine = styled.hr`
-  margin: 20px auto;
+  margin: calc(100% - 90%) auto 0;
   border: 0;
-  height: 2px;
+  height: 1px;
   background: ${props => props.theme.main.hr_color_b};
 `
 
 const FlexRow = styled.div`
   display: flex;
   flex-direction: row;
+  margin: 0 auto;
+  max-width: calc(100% - 100px);
+  gap: 300px;
+  margin-bottom: 20px;
+  font-size: 18px;
+
+  @media (max-width: 300px) {
+    gap: 30px;
+    font-size: 8px;
+  }
+  @media (max-width: 450px) {
+    gap: 50px;
+    font-size: 12px;
+  }
+
+  @media (max-width: 600px) {
+    gap: 100px;
+    font-size: 12px;
+  }
+
+  @media (max-width: 900px) {
+    gap: 200px;
+  }
+
+  @media (min-width: 901px) {
+    gap: 300px;
+  }
+`
+
+const FlexRowText = styled.div`
+  display: flex;
   gap: 50px;
+`
+
+const YearText = styled.div`
+  margin: 30px 0 20px;
 `
