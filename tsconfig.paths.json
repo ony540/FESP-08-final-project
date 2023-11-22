@@ -21,7 +21,10 @@
       "@types/*": ["./types/*"],
 
       "@common": ["./components/common/index.ts"],
-      "@common/*": ["/components/common/*"]
+      "@common/*": ["/components/common/*"],
+
+      "@utils": ["./utils/index.ts"],
+      "@utils/*": ["/utils/*"]
     }
   }
 }

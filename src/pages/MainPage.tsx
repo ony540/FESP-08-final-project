@@ -1,4 +1,8 @@
-import { CommonFooter, CommonHeader } from '@components/common'
+import {
+  CommonFooter,
+  CommonHeader,
+  CommonScrollAnchor
+} from '@components/common'
 import { MainContent, MainThumbnail } from '@components/main'
 
 export const MainPage = () => {
@@ -8,6 +12,7 @@ export const MainPage = () => {
       <MainThumbnail />
       <MainContent />
       <CommonFooter />
+      <CommonScrollAnchor />
     </>
   )
 }
