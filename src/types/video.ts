@@ -49,6 +49,18 @@ export interface VideoItem {
   snippet: VideoSnippet
 }
 
+export interface RelatedVideoItem {
+  etag: string
+  id: RelatedId
+  kind: string
+  snippet: VideoSnippet
+}
+
+export interface RelatedId {
+  kind: string
+  videoId: string
+}
+
 export interface VideoListResponse {
   etag: string
   items: VideoItem[]
