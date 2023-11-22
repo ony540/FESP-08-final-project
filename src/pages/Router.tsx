@@ -1,6 +1,6 @@
 import { createBrowserRouter, type RouteObject } from 'react-router-dom'
-import { ErrorComponent } from '../components'
 import { Layout, MainPage, DetailPage } from '@pages/index'
+import { ErrorComponent } from '@components'
 
 const generateRoute = (
   path: any,
@@ -19,11 +19,12 @@ export const routes = [
   {
     path: '/',
     element: <Layout />,
-    ErrorComponent: <ErrorComponent />,
+    errorComponent: <ErrorComponent />,
     children: [
       generateRoute('/', <MainPage />),
-      generateRoute('/detail/:id', <DetailPage />)
-    ]
+      generateRoute('/detail:id', <DetailPage />)
+    ],
+    errorElement: <ErrorComponent />
   }
 ]
 
