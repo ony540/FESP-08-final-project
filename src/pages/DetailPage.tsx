@@ -1,4 +1,4 @@
-import { DetailMainContent, DetailRelatedList } from '@components'
+import { CommentsBox, DetailMainContent, DetailRelatedList } from '@components'
 import { CommonFooter, CommonHeader } from '@components/common'
 import { RelatedVideoItem, VideoItem } from '@types'
 import { useEffect, useLayoutEffect, useState } from 'react'
@@ -43,6 +43,7 @@ export const DetailPage = () => {
         id={id}
       />
       <DetailRelatedList relatedData={relatedData} />
+      <CommentsBox videoId={id} />
       <CommonFooter />
     </>
   )

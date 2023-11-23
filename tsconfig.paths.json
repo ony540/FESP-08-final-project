@@ -20,6 +20,13 @@
       "@utils": ["./utils/index.ts"],
       "@utils/*": ["/utils/*"],
 
+      //API child
+      "@API": ["./API/index.ts"],
+      "@API/*": ["/API/*"],
+
+      "@comment": ["./API/comment/index.ts"],
+      "@comment/*": ["/API/comment/*"],
+
       // component child
       "@components": ["./components/index.ts"],
       "@components/*": ["./components/*"],
