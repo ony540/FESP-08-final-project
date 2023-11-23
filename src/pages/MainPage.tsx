@@ -7,7 +7,7 @@ import {
 } from '@components'
 import Dark from '@components/Dark'
 import { useDebounce } from '@hooks'
-import { CommonScrollAnchor } from '@icons'
+import { CommonTopButton } from '@common'
 import { useState, useEffect } from 'react'
 import { useLoaderData } from 'react-router-dom'
 
@@ -57,7 +57,7 @@ export const MainPage = () => {
       )}
 
       <CommonFooter />
-      <CommonScrollAnchor />
+      <CommonTopButton />
     </>
   )
 }

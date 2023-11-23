@@ -1,6 +1,7 @@
 export const theme = {
   main: {
     bg_color: '#0A070B',
+    bg_color_g: '#191919',
     ft_color_w: '#fff',
     ft_color_r: '#F41B3B',
     ft_color_g: '#807E81',

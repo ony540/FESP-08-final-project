@@ -54,12 +54,15 @@ export const DetailMainContent = ({
 
 const VideoBox = styled.div`
   iframe {
-    border-radius: 8px;
     display: block;
     margin: 0 auto 40px;
     width: 1322px;
-    width: calc(100% - 100px);
+    max-width: calc(100% - 100px);
     aspect-ratio: 16/9;
+
+    @media screen and (max-width: 600px) {
+      max-width: 100%;
+    }
   }
 `
 
