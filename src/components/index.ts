@@ -1,6 +1,6 @@
 export * from './ErrorComponent'
 export * from './detail'
 export * from './main'
-export * from './search'
 export * from './common'
+export * from './icons'
 export * from './Dark'

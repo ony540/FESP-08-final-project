@@ -1,1 +1,1 @@
-export * from './SearchContent'
+export * from './IsNotSearched'
