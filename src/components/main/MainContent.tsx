@@ -11,6 +11,7 @@ import {
 } from '@styles'
 import { VideoItem } from '@types'
 import { useState } from 'react'
+// import { handleMouseEnter, handleMouseLeave, moveToDetail } from '@utils'
 import { useNavigate } from 'react-router-dom'
 
 export const MainContent = ({
@@ -20,10 +21,10 @@ export const MainContent = ({
   search?: string[]
   searchKeyword?: string
 }) => {
-  const navigate = useNavigate()
   const [hoveredVideoId, setHoveredVideoId] = useState<string | null>(null)
+  const navigate = useNavigate()
 
-  const handleMouseEnter = (id: string) => {
+  const handleMouseEnter = (id: any) => {
     setHoveredVideoId(id)
   }
 
@@ -31,7 +32,7 @@ export const MainContent = ({
     setHoveredVideoId(null)
   }
 
-  const handleClickItem = (id: string) => {
+  const moveToDetail = (id: string) => {
     navigate(`/detail/${id}`)
   }
 
@@ -59,10 +60,10 @@ export const MainContent = ({
                   </VideoOverlay>
                 )}
               </ThumbnailBoxImg>
-              <ThumbnailBoxTitle onClick={() => handleClickItem(i.id)}>
+              <ThumbnailBoxTitle onClick={() => moveToDetail(i.id)}>
                 {i.snippet.title}
               </ThumbnailBoxTitle>
-              <ThumbnailBoxDescription onClick={() => handleClickItem(i.id)}>
+              <ThumbnailBoxDescription onClick={() => moveToDetail(i.id)}>
                 {i.snippet.description}
               </ThumbnailBoxDescription>
             </ThumbnailBoxWrapper>

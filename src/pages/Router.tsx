@@ -1,5 +1,5 @@
 import { createBrowserRouter, type RouteObject } from 'react-router-dom'
-import { Layout, MainPage, DetailPage } from '@pages'
+import { Layout, MainPage, DetailPage, SearchPage } from '@pages'
 import { ErrorComponent } from '@components'
 
 const generateRoute = (
@@ -34,7 +34,8 @@ export const routes = [
     element: <Layout />,
     children: [
       generateRoute('/', <MainPage />),
-      generateRoute('/detail/:id', <DetailPage />)
+      generateRoute('/detail/:id', <DetailPage />),
+      generateRoute('/results', <SearchPage />)
     ],
     errorElement: <ErrorComponent />
   }
