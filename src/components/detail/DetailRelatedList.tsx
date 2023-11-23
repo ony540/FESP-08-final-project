@@ -67,23 +67,28 @@ export const DetailRelatedList = ({ relatedData }: DetailRelatedListProps) => {
 }
 
 const RelatedWrap = styled.div`
+  width: calc(100% - 100px);
+  margin: 0 auto;
+
   h2 {
     font-size: 28px;
     font-weight: 600;
-    margin-bottom: 40px;
+    margin: 80px auto 20px;
 
     @media screen and (max-width: 600px) {
-      margin-bottom: 12px;
+      margin-bottom: 20px;
     }
   }
-  margin: 80px auto 0;
-  max-width: calc(100% - 100px);
 `
 
 const RelatedVideoList = styled.ul`
   display: flex;
   gap: 24px;
   overflow-x: scroll;
+
+  li:hover > div {
+    opacity: 0.85;
+  }
 `
 
 const ThumbnailBoxImg = styled.div<ThumbnailImg>`

@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
-import { CommonLogoProps } from '@types'
+import { CommonButtonProps } from '@types'
 
-export const CommonLogo: React.FC<CommonLogoProps> = ({ width, height }) => {
+export const CommonLogo: React.FC<CommonButtonProps> = ({ width, height }) => {
   return (
     <svg
       width={width}

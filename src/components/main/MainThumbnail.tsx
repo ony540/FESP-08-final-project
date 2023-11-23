@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react/prop-types */
 import { VideoItem } from '@types'
 import styled from 'styled-components'
@@ -6,15 +5,15 @@ import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import { useNavigate } from 'react-router-dom'
-import { CommonPlayLogo } from '@icons'
+import { CommonArrow, CommonPlayLogo } from '@icons'
 
 interface Slide {
   $image?: string
   $height?: number
 }
 
-interface SearchProps {
-  $search?: any
+interface NextArrowProps {
+  onClick?: React.MouseEventHandler<HTMLButtonElement>
 }
 
 const getRandomItems = (array: any[], count: number) => {
@@ -22,11 +21,9 @@ const getRandomItems = (array: any[], count: number) => {
 }
 
 export const MainThumbnail = ({
-  preLoadData,
-  search
+  preLoadData
 }: {
   preLoadData: VideoItem[]
-  search?: string[]
 }) => {
   const navigate = useNavigate()
 
@@ -36,13 +33,21 @@ export const MainThumbnail = ({
     navigate(`/detail/${id}`)
   }
 
-  const CustomPrev: React.FC<
-    React.HTMLAttributes<HTMLButtonElement>
-  > = props => <Prev onClick={props.onClick}>{'<'} </Prev>
+  const CustomPrev: React.FC<React.HTMLAttributes<HTMLButtonElement>> = ({
+    onClick
+  }: NextArrowProps) => (
+    <Prev onClick={onClick}>
+      <CommonArrow />
+    </Prev>
+  )
 
-  const CustomNext: React.FC<
-    React.HTMLAttributes<HTMLButtonElement>
-  > = props => <Next onClick={props.onClick}>{'>'} </Next>
+  const CustomNext: React.FC<React.HTMLAttributes<HTMLButtonElement>> = ({
+    onClick
+  }: NextArrowProps) => (
+    <Next onClick={onClick}>
+      <CommonArrow rotate={180} />
+    </Next>
+  )
 
   const settings = {
     dots: true,
@@ -78,7 +83,7 @@ export const MainThumbnail = ({
     </>
   )
 }
-const Wrap = styled.div<SearchProps>`
+const Wrap = styled.div`
   margin: 0 auto;
   max-width: calc(100% -100px);
 `
@@ -103,7 +108,7 @@ const PlayBtnBox = styled.div`
   align-items: center;
   padding: 0 16px;
   gap: 20px;
-  border-radius: 3px;
+  border-radius: 4px;
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(20px);
   width: 191px;
@@ -121,41 +126,24 @@ const PlayBtnText = styled.div`
   font-size: 20px;
 `
 
-// BUTTON
-// 기존
-const Prev = styled.button`
+// 슬라이드 BUTTON
+const SlideButton = styled.button`
   position: absolute;
   top: 50%;
-  left: 10px;
+  transform: translateY(-50%);
   z-index: 10;
-  color: red;
   background-color: ${props => props.theme.main.ft_color_w};
   border-radius: 50%;
-  border: none;
   width: 50px;
   height: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 28px;
-  font-weight: bold;
 `
 
-// 기존
-const Next = styled.button`
-  position: absolute;
-  top: 50%;
-  right: 10px;
-  z-index: 1;
-  color: red;
-  background-color: ${props => props.theme.main.ft_color_w};
-  border-radius: 50%;
-  border: none;
-  width: 50px;
-  height: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 28px;
-  font-weight: bold;
+const Prev = styled(SlideButton)`
+  left: 16px;
+`
+const Next = styled(SlideButton)`
+  right: 16px;
 `
