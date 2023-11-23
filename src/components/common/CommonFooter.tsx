@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { FOOTER_TEXT } from '@constants'
-import { CommonSocial } from './CommonSocial'
-import { CommonLogo } from './CommonLogo'
+import { CommonSocial } from '../icons/CommonSocial'
+import { CommonLogo } from '../icons/CommonLogo'
 
 export const CommonFooter = () => {
   const renderRowText = () => {

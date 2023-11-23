@@ -1,22 +1,17 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import styled, { keyframes } from 'styled-components'
-import { CommonLogo } from './CommonLogo'
+import { CommonLogo } from '../icons/CommonLogo'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { CommonSearch } from './CommonSearch'
+import { CommonSearch } from '../icons/CommonSearch'
 import { useEffect, useRef, useState } from 'react'
-import { CommonXBtn } from './CommonXBtn'
+import { CommonXBtn } from '../icons/CommonXBtn'
 
 interface Truthy {
-  $isTrue: boolean
+  $isTrue?: boolean
+  $isSearch?: boolean
 }
 
-export const CommonHeader = ({
-  handleSearch,
-  preLoadData
-}: {
-  handleSearch?: any
-  preLoadData?: any
-}) => {
+export const CommonHeader = ({ handleSearch }: { handleSearch?: any }) => {
   const [isSearch, setIsSearch] = useState(false)
   const naviagate = useNavigate()
   const inputRef = useRef<HTMLInputElement>(null)
@@ -52,7 +47,7 @@ export const CommonHeader = ({
         {location.pathname === '/' && (
           <>
             {isSearch ? (
-              <SearchBarWrapper>
+              <SearchBarWrapper $isSearch={isSearch}>
                 <StyledInput
                   maxLength={30}
                   ref={inputRef}
@@ -77,13 +72,13 @@ export const CommonHeader = ({
 
 // KEYFRAMES
 const animating = keyframes`
-from{
-  width: 20px
-}
+  from {
+    width: 20px;
+  }
 
-to{
-    width: 300px
-}
+  to {
+    width: 300px;
+  }
 `
 
 // HEADER CONTAINER
@@ -103,7 +98,7 @@ const LogoIconWrapper = styled.div`
 `
 
 // SEARCH BAR CONTAINER
-const SearchBarWrapper = styled.div`
+const SearchBarWrapper = styled.div<Truthy>`
   display: flex;
   align-items: center;
   border-radius: 8px;
@@ -115,7 +110,7 @@ const SearchBarWrapper = styled.div`
   width: 330px;
   background-color: #fff;
   z-index: 0;
-  animation: ${animating} 0.3s forwards;
+  animation: ${animating} 0.4s forwards;
 `
 
 // X BTN

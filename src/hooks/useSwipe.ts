@@ -1,18 +1,7 @@
-import { RefObject, useRef, useState } from 'react'
+import { ListSwipeProps } from '@types'
+import { useRef, useState } from 'react'
 
-type MouseEventFunction<T = Element, E = MouseEvent> = (
-  e: React.MouseEvent<T, E>
-) => void
-
-interface ListSwipeProps {
-  isDrag: boolean
-  scrollRef: RefObject<HTMLUListElement>
-  onDragStart: MouseEventFunction<HTMLUListElement>
-  onDragMove: MouseEventFunction<HTMLUListElement>
-  onDragEnd: MouseEventFunction<HTMLUListElement>
-}
-
-export default function useSwipe(): ListSwipeProps {
+export const useSwipe = (): ListSwipeProps => {
   const scrollRef = useRef<HTMLUListElement>(null)
   const [isStart, setIsStart] = useState<boolean>(false)
   const [isDrag, setIsDrag] = useState<boolean>(false)

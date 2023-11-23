@@ -57,7 +57,7 @@ export const ThumbnailBoxImg = styled.div<ThumbnailImg>`
     border-radius: 8px;
 
     .video-overlay {
-      display: flex;
+      display: block;
     }
   }
 `

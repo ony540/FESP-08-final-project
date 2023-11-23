@@ -5,8 +5,8 @@ import styled from 'styled-components'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
-import { CommonPlayLogo } from '@components/common'
 import { useNavigate } from 'react-router-dom'
+import { CommonPlayLogo } from '@icons'
 
 interface Slide {
   $image?: string
