@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
-import { CommonLogoProps } from '@types'
-export const CommonWatchList: React.FC<CommonLogoProps> = ({
+import { CommonButtonProps } from '@types'
+export const CommonWatchList: React.FC<CommonButtonProps> = ({
   width,
   height
 }) => {
