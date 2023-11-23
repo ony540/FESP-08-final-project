@@ -1,11 +1,11 @@
 import { createBrowserRouter, type RouteObject } from 'react-router-dom'
-import { Layout, MainPage, DetailPage } from '@pages/index'
+import { Layout, MainPage, DetailPage } from '@pages'
 import { ErrorComponent } from '@components'
 
 const generateRoute = (
-  path: any,
-  component: any,
-  children?: any
+  path: string,
+  component: React.ReactNode,
+  children?: RouteObject[]
 ): RouteObject => {
   return {
     path: path,
@@ -13,9 +13,17 @@ const generateRoute = (
     errorElement: <ErrorComponent />,
     children: children,
     loader: async () => {
-      const res = await fetch('/videos/popular.json')
-      const json = await res.json()
-      return json.items
+      try {
+        const res = await fetch('/videos/popular.json')
+        if (!res.ok) {
+          throw new Error('Data Fetching Error')
+        }
+        const json = await res.json()
+        return json.items
+      } catch (error) {
+        console.error('Error fetching Data:', error)
+        throw error
+      }
     }
   }
 }

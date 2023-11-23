@@ -1,4 +1,4 @@
-import { CommonShare, CommonWatchList } from '@components/common'
+import { CommonShare, CommonWatchList } from '@icons'
 import { VideoItem } from '@types'
 import { formatTime } from '@utils'
 import styled from 'styled-components'
@@ -54,6 +54,7 @@ export const DetailMainContent = ({
 
 const VideoBox = styled.div`
   iframe {
+    border-radius: 8px;
     display: block;
     margin: 0 auto 40px;
     width: 1322px;

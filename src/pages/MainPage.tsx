@@ -1,12 +1,12 @@
-import { SearchContent } from '@components'
 import {
   CommonFooter,
   CommonHeader,
-  CommonScrollAnchor
-} from '@components/common'
-
-import { MainContent, MainThumbnail } from '@components/main'
+  MainContent,
+  MainThumbnail,
+  SearchContent
+} from '@components'
 import { useDebounce } from '@hooks'
+import { CommonScrollAnchor } from '@icons'
 import { useState, useEffect } from 'react'
 import { useLoaderData } from 'react-router-dom'
 
@@ -28,23 +28,21 @@ export const MainPage = () => {
   }
 
   useEffect(() => {
-    const filteredItems = preLoadData?.filter((item: any) =>
-      item.snippet.title
+    const filteredItems = preLoadData?.filter((item: any) => {
+      const formattedTitle = item.snippet.title.replace(/\s/g, '').toLowerCase()
+      const formattedSearchKeyword = debouncedSearchKeyword
+        .replace(/\s/g, '')
         .toLowerCase()
-        .replace(' ', '')
-        .toLocaleLowerCase()
-        .includes(debouncedSearchKeyword.toLowerCase())
-    )
+
+      return formattedTitle.includes(formattedSearchKeyword)
+    })
 
     setSearch(filteredItems || [])
   }, [debouncedSearchKeyword])
 
   return (
     <>
-      <CommonHeader
-        handleSearch={handleSearch}
-        preLoadData={preLoadData}
-      />
+      <CommonHeader handleSearch={handleSearch} />
       {!searchKeyword.length && <MainThumbnail preLoadData={preLoadData} />}
 
       {searchKeyword.length ? (

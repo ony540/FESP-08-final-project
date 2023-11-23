@@ -1,4 +1,4 @@
-import useSwipe from '@hooks/useSwipe'
+import { useSwipe } from '@hooks'
 import { RelatedVideoItem } from '@types'
 import { formatTime } from '@utils'
 import { useEffect } from 'react'

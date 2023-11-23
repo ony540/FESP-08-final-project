@@ -5,9 +5,6 @@
       "@pages": ["./pages/index.ts"],
       "@pages/*": ["./pages/*"],
 
-      "@components": ["./components/index.ts"],
-      "@components/*": ["./components/*"],
-
       "@constants": ["./constants/index.ts"],
       "@constants/*": ["./constants/*"],
 
@@ -20,14 +17,21 @@
       "@types": ["./types/index.ts"],
       "@types/*": ["./types/*"],
 
+      "@utils": ["./utils/index.ts"],
+      "@utils/*": ["/utils/*"],
+
+      // component child
+      "@components": ["./components/index.ts"],
+      "@components/*": ["./components/*"],
+
       "@common": ["./components/common/index.ts"],
       "@common/*": ["/components/common/*"],
 
       "@search": ["./components/search/index.ts"],
       "@search/*": ["/components/search/*"],
 
-      "@utils": ["./utils/index.ts"],
-      "@utils/*": ["/utils/*"]
+      "@icons": ["./components/icons/index.ts"],
+      "@icons/*": ["/components/icons/*"]
     }
   }
 }

@@ -1,8 +1,8 @@
 import { ERROR_TEXTS } from '../constants'
-import { CommonFooter, CommonHeader } from '@components/common'
 import { GlobalStyles } from '@styles'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
+import { CommonFooter, CommonHeader } from '@common'
 
 export const ErrorComponent = () => {
   const navigate = useNavigate()
