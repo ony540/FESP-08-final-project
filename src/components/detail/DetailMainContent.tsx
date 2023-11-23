@@ -1,4 +1,4 @@
-import { CommonShare, CommonWatchList } from '@icons'
+import { CommonShare, CommonWatchList } from '@components/icons'
 import { VideoItem } from '@types'
 import { formatTime } from '@utils'
 import styled from 'styled-components'

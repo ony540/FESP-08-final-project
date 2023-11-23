@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import styled, { keyframes } from 'styled-components'
 import { CommonLogo } from '../icons/CommonLogo'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { CommonSearch } from '../icons/CommonSearch'
 import { useEffect, useRef, useState } from 'react'
 import { CommonXBtn } from '../icons/CommonXBtn'
@@ -11,26 +11,32 @@ interface Truthy {
   $isSearch?: boolean
 }
 
-export const CommonHeader = ({ handleSearch }: { handleSearch?: any }) => {
+export const CommonHeader = () => {
   const [isSearch, setIsSearch] = useState(false)
-  const naviagate = useNavigate()
+  const [searchInput, setSearchInput] = useState('')
+  const navigate = useNavigate()
   const inputRef = useRef<HTMLInputElement>(null)
-  const location = useLocation()
 
   const moveToMain = () => {
-    naviagate('/')
+    navigate('/')
   }
 
   const handleClickSearch = () => {
     setIsSearch(!isSearch)
-    handleSearch('')
+  }
+
+  const onSearchEnter = (e: any) => {
+    if (e.key === 'Enter') {
+      navigate({
+        pathname: '/results',
+        search: `?search_query=${searchInput}`
+      })
+    }
   }
 
   useEffect(() => {
     inputRef.current?.focus()
   }, [isSearch])
-
-  // const renderHeader = () => {}
 
   return (
     <>
@@ -44,15 +50,16 @@ export const CommonHeader = ({ handleSearch }: { handleSearch?: any }) => {
         </LogoIconWrapper>
 
         {/* 검색 아이콘 */}
-        {location.pathname === '/' && (
+        {
           <>
             {isSearch ? (
               <SearchBarWrapper $isSearch={isSearch}>
                 <StyledInput
+                  onKeyDown={onSearchEnter}
                   maxLength={30}
                   ref={inputRef}
                   $isTrue={isSearch}
-                  onChange={e => handleSearch(e.target.value)}
+                  onChange={e => setSearchInput(e.target.value)}
                 />
                 <SearchBarXWrapper onClick={handleClickSearch}>
                   <CommonXBtn />
@@ -64,7 +71,7 @@ export const CommonHeader = ({ handleSearch }: { handleSearch?: any }) => {
               </SearchIconWrapper>
             )}
           </>
-        )}
+        }
       </HeaderContainer>
     </>
   )

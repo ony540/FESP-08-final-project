@@ -42,6 +42,12 @@ export const ContentWrap = styled.ul`
     grid-template-columns: repeat(4, minmax(169px, 1fr));
     grid-template-rows: repeat(auto-fit, 1fr);
   }
+
+  & li:nth-last-child(1):hover::after {
+    content: '';
+    display: block;
+    height: 250px;
+  }
 `
 
 // ContentCard
