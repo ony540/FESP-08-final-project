@@ -4,14 +4,16 @@ import { lightTheme, darkTheme, GlobalStyles } from '../styles/global'
 
 const StyledApp = styled.div`
   color: ${props => props.theme.fontColor};
-  background-color: ${props => props.theme.body};
-  transition:
-    background-color 0.3s,
-    color 0.3s;
+  border: 1px solid red;
+  width: 80px;
+  padding: 10px;
+  text-align: center;
+  background-color: red;
+  transition: background-color 0.3s;
 `
 
 function Dark() {
-  const [theme, setTheme] = useState('light')
+  const [theme, setTheme] = useState<'dark' | 'light'>('dark')
 
   const themeToggler = () => {
     setTheme(prevTheme => (prevTheme === 'light' ? 'dark' : 'light'))
@@ -21,7 +23,7 @@ function Dark() {
     <ThemeProvider theme={theme === 'dark' ? darkTheme : lightTheme}>
       <GlobalStyles />
       <StyledApp>
-        <button onClick={themeToggler}>Change Theme</button>
+        <button onClick={() => themeToggler()}>Change</button>
       </StyledApp>
     </ThemeProvider>
   )

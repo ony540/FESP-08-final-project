@@ -30,8 +30,6 @@ export const CommonHeader = ({ handleSearch }: { handleSearch?: any }) => {
     inputRef.current?.focus()
   }, [isSearch])
 
-  // const renderHeader = () => {}
-
   return (
     <>
       <HeaderContainer>
@@ -108,7 +106,7 @@ const SearchBarWrapper = styled.div<Truthy>`
   display: flex;
   height: 40px;
   width: 330px;
-  background-color: #fff;
+  background-color: ${props => props.theme.backgroundColor};
   z-index: 0;
   animation: ${animating} 0.4s forwards;
 `
