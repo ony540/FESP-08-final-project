@@ -1,9 +1,9 @@
 import {
-  ThumbnailBoxDescription,
+  ContentCardDescription,
+  ContentCardTitle,
+  ContentCardWrapper,
+  ContentWrap,
   ThumbnailBoxImg,
-  ThumbnailBoxTitle,
-  ThumbnailBoxWrapper,
-  ThumbnailWrap,
   VideoIframe,
   VideoOverlay
 } from '@styles'
@@ -26,9 +26,9 @@ export const SearchContent = ({
   if (debouncedSearchKeyword && !search.length)
     return <StyledH2>검색된 결과가 없습니다</StyledH2>
   return (
-    <ThumbnailWrap>
+    <ContentWrap>
       {search?.map((i: any, idx: any) => (
-        <ThumbnailBoxWrapper key={idx}>
+        <ContentCardWrapper key={idx}>
           <ThumbnailBoxImg
             $image={i.snippet.thumbnails.standard.url}
             $height={+i.snippet.thumbnails.medium.height}>
@@ -39,15 +39,15 @@ export const SearchContent = ({
               />
             </VideoOverlay>
           </ThumbnailBoxImg>
-          <ThumbnailBoxTitle onClick={() => handleClickItem(i.id)}>
+          <ContentCardTitle onClick={() => handleClickItem(i.id)}>
             {i.snippet.title}
-          </ThumbnailBoxTitle>
-          <ThumbnailBoxDescription onClick={() => handleClickItem(i.id)}>
+          </ContentCardTitle>
+          <ContentCardDescription onClick={() => handleClickItem(i.id)}>
             {i.snippet.description}
-          </ThumbnailBoxDescription>
-        </ThumbnailBoxWrapper>
+          </ContentCardDescription>
+        </ContentCardWrapper>
       ))}
-    </ThumbnailWrap>
+    </ContentWrap>
   )
 }
 
