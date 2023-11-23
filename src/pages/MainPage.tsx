@@ -5,6 +5,7 @@ import {
   MainThumbnail,
   SearchContent
 } from '@components'
+import Dark from '@components/Dark'
 import { useDebounce } from '@hooks'
 import { CommonScrollAnchor } from '@icons'
 import { useState, useEffect } from 'react'
@@ -43,6 +44,7 @@ export const MainPage = () => {
   return (
     <>
       <CommonHeader handleSearch={handleSearch} />
+      <Dark />
       {!searchKeyword.length && <MainThumbnail preLoadData={preLoadData} />}
 
       {searchKeyword.length ? (
