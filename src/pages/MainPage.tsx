@@ -4,7 +4,7 @@ import {
   MainContent,
   MainThumbnail
 } from '@components'
-import { CommonScrollAnchor } from '@components/icons'
+import { CommonTopButton } from '@common'
 import { useLoaderData } from 'react-router-dom'
 
 export const MainPage = () => {
@@ -18,7 +18,7 @@ export const MainPage = () => {
       <MainContent preLoadData={preLoadData} />
 
       <CommonFooter />
-      <CommonScrollAnchor />
+      <CommonTopButton />
     </>
   )
 }
