@@ -6,14 +6,17 @@ import { Reset } from 'styled-reset'
 import { RouterProvider } from 'react-router-dom'
 import { router } from '@pages'
 import { theme } from '@styles'
+import { RecoilRoot } from 'recoil'
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
   <React.StrictMode>
-    <ThemeProvider theme={theme}>
-      <Reset />
-      <RouterProvider router={router} />
-    </ThemeProvider>
+    <RecoilRoot>
+      <ThemeProvider theme={theme}>
+        <Reset />
+        <RouterProvider router={router} />
+      </ThemeProvider>
+    </RecoilRoot>
   </React.StrictMode>
 )
 

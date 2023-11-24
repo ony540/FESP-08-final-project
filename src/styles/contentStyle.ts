@@ -111,6 +111,9 @@ export const ContentCardTitle = styled.h3`
   white-space: nowrap;
   text-overflow: ellipsis;
   word-break: break-all;
+  &:hover {
+    color: white;
+  }
 `
 
 export const ContentCardDescription = styled.p`
