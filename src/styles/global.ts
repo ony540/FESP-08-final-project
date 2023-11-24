@@ -15,9 +15,8 @@ export const GlobalStyles = createGlobalStyle`
   html,body {
     font-family: 'Pretendard', sans-serif;
     -ms-overflow-style: none;
-
-    background-color: ${theme.main.bg_color};
-    color: ${theme.main.ft_color_w};
+    background-color: ${props => props.theme.body};
+    color: ${props => props.theme.fontColor};
 
     ::-webkit-scrollbar {
     display: none;

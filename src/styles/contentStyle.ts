@@ -58,6 +58,8 @@ export const ContentCardWrapper = styled.div`
   transition: all 0.3s;
   transform-origin: 50% 80%;
   border-radius: 8px;
+  color: ${props => props.theme.text_color_b};
+  background-color: ${props => props.theme.background_color};
 
   &:hover {
     transform: scale(1.3);

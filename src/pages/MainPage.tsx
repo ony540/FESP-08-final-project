@@ -4,8 +4,6 @@ import {
   MainContent,
   MainThumbnail
 } from '@components'
-import Dark from '@components/Dark'
-import { useDebounce } from '@hooks'
 import { CommonTopButton } from '@common'
 import { useLoaderData } from 'react-router-dom'
 

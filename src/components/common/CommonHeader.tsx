@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom'
 import { CommonSearch } from '../icons/CommonSearch'
 import { useEffect, useRef, useState } from 'react'
 import { CommonXBtn } from '../icons/CommonXBtn'
+import Dark from '@components/Dark'
 
 interface Truthy {
   $isTrue?: boolean
@@ -48,7 +49,8 @@ export const CommonHeader = () => {
             height={50}
           />
         </LogoIconWrapper>
-
+        {/* 다크모드 버튼 */}
+        <Dark />
         {/* 검색 아이콘 */}
         {
           <>
@@ -66,9 +68,12 @@ export const CommonHeader = () => {
                 </SearchBarXWrapper>
               </SearchBarWrapper>
             ) : (
-              <SearchIconWrapper onClick={handleClickSearch}>
-                <CommonSearch />
-              </SearchIconWrapper>
+              <>
+                <SearchIconWrapper onClick={handleClickSearch}>
+                  <CommonSearch darkMode={true} />
+                  <CommonSearch darkMode={false} />
+                </SearchIconWrapper>
+              </>
             )}
           </>
         }
@@ -143,8 +148,8 @@ const SearchIconWrapper = styled.div`
 const StyledInput = styled.input<Truthy>`
   position: absolute;
   padding: 8px 12px;
-  outline: none;
-  border: none;
+  /* outline: none; */
+  border: 1px solid;
   border-radius: 8px;
   animation: inherit;
   font-size: ${props => props.theme.customSize.large};
