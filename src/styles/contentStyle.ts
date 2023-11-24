@@ -79,6 +79,7 @@ export const ContentCardWrapper = styled.div`
 
     & > h3 {
       padding: 0 8px;
+      color: white;
     }
 
     & > p {
