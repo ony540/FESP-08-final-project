@@ -30,10 +30,9 @@ export const uploadComment = async ({
   }
 }
 
-export const deleteComment = async (id: string) => {
+export const deleteComment = async (id: number) => {
   try {
     await supabase.from(TABLE_NAME).delete().eq('id', id).select()
-    // setComments(comments.filter(comment => comment.id !== id))
   } catch (error) {
     console.log('error when getComments', error)
   }
