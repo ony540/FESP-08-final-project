@@ -25,7 +25,7 @@ export const CommonHeader = () => {
     setIsSearch(!isSearch)
   }
 
-  const onSearchEnter = (e: any) => {
+  const onSearchEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       navigate({
         pathname: '/results',

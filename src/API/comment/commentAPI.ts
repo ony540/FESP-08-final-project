@@ -16,12 +16,17 @@ export const getComments = async (videoId: string) => {
 
 export const uploadComment = async ({
   commentInput,
+  usernameInput,
   videoId
 }: UploadCommentProps) => {
   try {
     const { data, error } = await supabase
       .from(TABLE_NAME)
-      .insert({ text: commentInput, video_id: videoId })
+      .insert({
+        text: commentInput,
+        username: usernameInput,
+        video_id: videoId
+      })
       .select()
     if (error) console.log('error when uploadComment', error)
     return data
