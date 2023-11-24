@@ -4,20 +4,25 @@ export const GlobalStyles = createGlobalStyle`
   html,body {
     font-family: 'Pretendard', sans-serif;
     -ms-overflow-style: none;
-    background-color: ${props => props.theme.body};
-    color: ${props => props.theme.fontColor};
+    background-color: ${props => props.theme.themMode.body};
+    color: ${props => props.theme.themMode.fontColor};
 
     ::-webkit-scrollbar {
     display: none;
-    
     overflow-x: hidden;
-    
     }
   }
-
-  body {
-    background-color: ${props => props.theme.body};
+  .a11y-hidden {
+    clip: rect(1px, 1px, 1px, 1px);
+    clip-path: inset(50%);
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
   }
+     
 
   * {
     box-sizing: border-box;

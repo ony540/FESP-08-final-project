@@ -1,4 +1,4 @@
-export const theme = {
+const commons = {
   main: {
     bg_color: '#0A070B',
     bg_color_g: '#191919',
@@ -19,3 +19,26 @@ export const theme = {
     xxxlarge: '48px'
   }
 }
+
+const darkColors = {
+  body: '#0A070B',
+  fontColor: '#fff',
+  ButtonColor: '#ffffff80'
+}
+const lightColors = {
+  body: '#fff',
+  fontColor: '#000',
+  ButtonColor: '#dedede99'
+}
+
+export const lightTheme = {
+  themMode: lightColors,
+  ...commons
+}
+
+export const darkTheme = {
+  themMode: darkColors,
+  ...commons
+}
+
+export type Theme = typeof lightTheme | typeof darkTheme

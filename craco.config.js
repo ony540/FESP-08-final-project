@@ -12,6 +12,7 @@ module.exports = {
       '@hooks': path.resolve(__dirname, 'src/hooks'),
       '@styles': path.resolve(__dirname, 'src/styles'),
       '@utils': path.resolve(__dirname, 'src/utils'),
+      '@atom': path.resolve(__dirname, 'src/atom'),
 
       // component child
       '@components': path.resolve(__dirname, 'src/components'),

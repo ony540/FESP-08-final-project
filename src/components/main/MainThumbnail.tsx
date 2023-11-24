@@ -132,13 +132,15 @@ const SlideButton = styled.button`
   top: 50%;
   transform: translateY(-50%);
   z-index: 10;
-  background-color: ${props => props.theme.main.ft_color_w};
+  background-color: ${props => props.theme.themMode.ButtonColor};
   border-radius: 50%;
   width: 50px;
   height: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
 `
 
 const Prev = styled(SlideButton)`

@@ -20,6 +20,9 @@
       "@utils": ["./utils/index.ts"],
       "@utils/*": ["/utils/*"],
 
+      "@atom": ["./atom/index.ts"],
+      "@atom/*": ["/atom/*"],
+
       // component child
       "@components": ["./components/index.ts"],
       "@components/*": ["./components/*"],

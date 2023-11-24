@@ -1,16 +1,15 @@
-/* eslint-disable react/prop-types */
+import { themeState } from '@atom'
 import { CommonButtonProps } from '@types'
-import { useTheme } from 'styled-components'
+import { useRecoilValue } from 'recoil'
 
 export const CommonSocial: React.FC<CommonButtonProps> = ({
   width,
   height
-}) => {
-  const theme = useTheme()
-  const lightColor = 'white'
-  const darkColor = '#4F4E50'
-  const fillColor = theme.theme === 'light' ? lightColor : darkColor
-  const strokeColor = theme.theme === 'dark' ? lightColor : darkColor
+}: CommonButtonProps) => {
+  const isDark = useRecoilValue(themeState)
+
+  const fillColor = isDark ? 'black' : 'white'
+  const strokeColor = isDark ? 'white' : 'black'
   return (
     <div>
       <svg
