@@ -51,7 +51,6 @@ export const ContentWrap = styled.ul`
 `
 
 // ContentCard
-
 export const ContentCardWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -60,13 +59,21 @@ export const ContentCardWrapper = styled.div`
   border-radius: 8px;
 
   &:hover {
-    transform: scale(1.3);
+    transform: scale(1.2);
     background-color: ${p => p.theme.main.bg_color_g};
+    outline: 2px solid ${p => p.theme.main.ft_color_p};
     position: absolute;
     min-width: 169px;
 
+    @media (min-width: 300px) {
+      width: calc(100% - 15px);
+      position: unset;
+      margin: 30px auto;
+    }
     @media (min-width: 600px) {
       width: calc(50% - 15px);
+      position: absolute;
+      margin: unset;
     }
     @media (min-width: 900px) {
       width: calc(33% - 30px);

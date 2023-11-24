@@ -1,8 +1,10 @@
+import { theme } from '@styles'
 import { ArrowButton, CommonButtonProps } from '@types'
 import styled from 'styled-components'
 
 export const CommonArrow: React.FC<CommonButtonProps> = ({
   color = '#191919',
+  // color = theme.main.ft_color_r,
   rotate
 }: CommonButtonProps) => {
   return (

@@ -18,7 +18,8 @@ export const DetailMainContent = ({
         <iframe
           src={`https://www.youtube.com/embed/${id}?si=9My22DHI1t8qtW0-`}
           title="YouTube video player"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe>
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share "
+          allowFullScreen></iframe>
       </VideoBox>
       <TextWrap>
         <InfoBox>

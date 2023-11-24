@@ -1,5 +1,5 @@
 import { CommentsBox, DetailMainContent, DetailRelatedList } from '@components'
-import { CommonFooter, CommonHeader } from '@components/common'
+import { CommonFooter, CommonHeader, CommonTopButton } from '@components/common'
 import { RelatedVideoItem, VideoItem } from '@types'
 import { useEffect, useLayoutEffect, useState } from 'react'
 import { useLoaderData, useLocation, useParams } from 'react-router-dom'
@@ -45,6 +45,7 @@ export const DetailPage = () => {
       <DetailRelatedList relatedData={relatedData} />
       <CommentsBox videoId={id} />
       <CommonFooter />
+      <CommonTopButton />
     </>
   )
 }
