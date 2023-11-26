@@ -42,6 +42,7 @@ const FooterContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  color: ${props => props.theme.main.ft_color};
 `
 
 const StyledHrLine = styled.hr`
@@ -86,8 +87,10 @@ const FlexRow = styled.div`
 const FlexRowText = styled.div`
   display: flex;
   gap: 50px;
+  color: ${props => props.theme.main.ft_color_b};
 `
 
 const YearText = styled.div`
   margin: 30px 0 20px;
+  color: ${props => props.theme.main.ft_color};
 `
