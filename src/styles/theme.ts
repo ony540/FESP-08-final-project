@@ -1,7 +1,6 @@
 const commons = {
   main: {
     bg_color: '#0A070B',
-    bg_color_g: '#191919',
     ft_color_w: '#fff',
     ft_color_r: '#F41B3B',
     ft_color_g: '#807E81',
@@ -23,12 +22,14 @@ const commons = {
 const darkColors = {
   body: '#0A070B',
   fontColor: '#fff',
-  ButtonColor: '#ffffff80'
+  ButtonColor: '#ffffff80',
+  hoverBgColor: '#191919'
 }
 const lightColors = {
   body: '#fff',
   fontColor: '#000',
-  ButtonColor: '#dedede99'
+  ButtonColor: '#dedede99',
+  hoverBgColor: '#fff'
 }
 
 export const lightTheme = {

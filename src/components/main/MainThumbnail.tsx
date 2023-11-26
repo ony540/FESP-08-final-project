@@ -77,7 +77,6 @@ export const MainThumbnail = ({
                 </ThumbnailBoxImg>
               </div>
             ))}
-          <CustomPrev />
         </Slider>
       </Wrap>
     </>

@@ -51,19 +51,17 @@ export const ContentWrap = styled.ul`
 `
 
 // ContentCard
-
 export const ContentCardWrapper = styled.div`
   display: flex;
   flex-direction: column;
   transition: all 0.3s;
   transform-origin: 50% 80%;
   border-radius: 8px;
-  color: ${props => props.theme.text_color_b};
-  background-color: ${props => props.theme.background_color};
-
   &:hover {
     transform: scale(1.3);
-    background-color: ${p => p.theme.main.bg_color_g};
+    background-color: ${p => p.theme.themMode.hoverBgColor};
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.12);
+
     position: absolute;
     min-width: 169px;
 
@@ -79,7 +77,7 @@ export const ContentCardWrapper = styled.div`
 
     & > h3 {
       padding: 0 8px;
-      color: white;
+      color: ${p => p.theme.themMode.fontColor};
     }
 
     & > p {
