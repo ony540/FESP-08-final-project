@@ -6,6 +6,7 @@ import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import { useNavigate } from 'react-router-dom'
 import { CommonArrow, CommonPlayLogo } from '@components/icons'
+import { useMemo } from 'react'
 
 interface Slide {
   $image?: string
@@ -16,8 +17,22 @@ interface NextArrowProps {
   onClick?: React.MouseEventHandler<HTMLButtonElement>
 }
 
-const getRandomItems = (array: any[], count: number) => {
-  return array.sort(() => 0.5 - Math.random()).slice(0, count)
+const getRandomItems = (array: VideoItem[], count: number) => {
+  const copyArray = [...array]
+  const resultArray: VideoItem[] = []
+
+  for (let i = 0; i < count; i++) {
+    const randomIndex = Math.floor(Math.random() * copyArray.length)
+    const randomData = copyArray[randomIndex]
+
+    if (!resultArray.includes(randomData)) {
+      resultArray.push(randomData)
+    } else {
+      i--
+    }
+  }
+
+  return resultArray
 }
 
 export const MainThumbnail = ({
@@ -27,7 +42,9 @@ export const MainThumbnail = ({
 }) => {
   const navigate = useNavigate()
 
-  const randomItems = getRandomItems(preLoadData, 5)
+  const randomItems = useMemo(() => {
+    return getRandomItems(preLoadData, 5)
+  }, [])
 
   const handlePlayButtonClick = (id: string) => {
     navigate(`/detail/${id}`)
