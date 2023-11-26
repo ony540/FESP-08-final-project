@@ -1,4 +1,7 @@
 import { deleteComment, getComments, uploadComment } from '@API'
+import { Modal } from '@components/modal/Modal'
+import ModalPortal from '@components/modal/Portal'
+import { useModal } from '@hooks'
 import { CommonXBtn } from '@components/icons'
 import { CommentType } from '@types'
 import { useEffect, useRef, useState } from 'react'
@@ -6,7 +9,6 @@ import styled, { css, keyframes } from 'styled-components'
 
 interface Random {
   $getColor?: any
-  $isActive?: boolean
 }
 
 const initailUserInput = {
@@ -20,14 +22,8 @@ export const CommentsBox = ({ videoId }: { videoId: string }) => {
     comment: '',
     username: ''
   })
-  const [gradientAnimation, setGradientAnimation] = useState(false)
-
-  const startGradientAnimation = () => {
-    setGradientAnimation(true)
-    setTimeout(() => {
-      setGradientAnimation(false)
-    }, 1000)
-  }
+  const { openModal, closeModal } = useModal()
+  const [selectedCommentId, setSelectedCommentId] = useState<number>(0)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -59,16 +55,22 @@ export const CommentsBox = ({ videoId }: { videoId: string }) => {
     setComments(prevData => [uploadedData[0], ...prevData])
   }
 
-  const handleClickDelete = async (id: number) => {
-    await deleteComment(id)
-    setComments(comments.filter(comment => comment.id !== id))
+  const handleDeleteModalOpen = async (id: number) => {
+    setSelectedCommentId(id)
+    openModal('댓글삭제')
+  }
+
+  const handleClickDelete = async () => {
+    closeModal()
+    setComments(comments.filter(comment => comment.id !== selectedCommentId))
+    await deleteComment(selectedCommentId)
   }
 
   useEffect(() => {
     if (commentInputRef.current) {
       const textarea = commentInputRef.current
       textarea.style.height = 'auto'
-      textarea.style.height = `${textarea.scrollHeight}px`
+      textarea.style.height = `${textarea.scrollHeight - 8}px`
     }
   }, [userInput.comment])
 
@@ -115,8 +117,6 @@ export const CommentsBox = ({ videoId }: { videoId: string }) => {
             댓글 달기
           </label>
           <CommentInput
-            $isActive={gradientAnimation}
-            onClick={startGradientAnimation}
             id="commentInput"
             placeholder="comments"
             name="comment"
@@ -127,10 +127,9 @@ export const CommentsBox = ({ videoId }: { videoId: string }) => {
           />
           <div></div>
         </div>
-        {/* <CommentInputDiv></CommentInputDiv> */}
         <BtnWrap>
-          <CreateCommentsBtn type="submit">작성 하기</CreateCommentsBtn>
-          <CancelCommentBtn type="button">취소 하기</CancelCommentBtn>
+          <CreateCommentsBtn type="submit">작성하기</CreateCommentsBtn>
+          <CancelCommentBtn type="button">취소하기</CancelCommentBtn>
         </BtnWrap>
       </InputContainer>
 
@@ -144,13 +143,16 @@ export const CommentsBox = ({ videoId }: { videoId: string }) => {
               <Comment>{comment.text}</Comment>
               <CommentDeleteBtn
                 type="button"
-                onClick={() => handleClickDelete(comment.id)}>
-                <CommonXBtn isWhite={true} />
+                onClick={() => handleDeleteModalOpen(comment.id)}>
+                <CommonXBtn isSmall={true} />
               </CommentDeleteBtn>
             </CommentWrap>
           </>
         ))}
       </CommentsList>
+      <ModalPortal>
+        <Modal onClick={handleClickDelete} />
+      </ModalPortal>
     </TotalContainer>
   )
 }
@@ -169,7 +171,7 @@ const InputContainer = styled.form`
 
 const animatingKeyframes = keyframes`
 from{
-  transform: scale(0);
+  transform: scale(0,1);
 
 }
 to{
@@ -177,13 +179,15 @@ to{
 }
 `
 const animating = css`
-  &:focus {
-    border-bottom: none;
+  &:focus-visible {
+    border-bottom: 1.4px solid transparent;
   }
   & + div {
+    position: relative;
+    top: -1.4px;
     width: 100%;
-    transform: scale(0);
-    height: 1px;
+    transform: scale(0, 1);
+    height: 1.4px;
     background: linear-gradient(
       to right,
       #f41b3b 0%,
@@ -193,64 +197,65 @@ const animating = css`
     );
   }
 
-  &:focus + div {
+  &:focus-visible + div {
     animation: ${animatingKeyframes} 0.5s forwards;
   }
 `
 
 const UserNameInput = styled.input`
-  background-color: ${props => props.theme.main.bg_color};
+  background-color: ${props => props.theme.themMode.body};
+  color: ${props => props.theme.themMode.fontColor};
   outline: none;
-  color: #fff;
+  border: none;
+  border-bottom: 1.4px solid ${props => props.theme.themMode.fontColor};
   padding: 18px;
   width: 160px;
   height: 32px;
   font-size: 16px;
-  border: none;
-  border-bottom: 1px solid #fff;
 
-  ${animating} & + div {
+  ${animating}
+
+  & + div {
     width: 160px;
   }
 `
 
-const CommentInput = styled.textarea<Random>`
-  background-color: ${props => props.theme.main.bg_color};
-  color: #fff;
-  border: none;
-  border-bottom: 1px solid #fff;
+const CommentInput = styled.textarea`
+  background-color: ${props => props.theme.themMode.body};
+  color: ${props => props.theme.themMode.fontColor};
   outline: none;
+  border: none;
+  border-bottom: 1.4px solid ${props => props.theme.themMode.fontColor};
   padding: 18px;
   width: 100%;
   resize: none;
-  font-size: 14px;
-  position: relative;
+  font-size: 16px;
 
   ${animating}
+
+  & + div {
+    top: -3.6px;
+  }
 `
 
 const BtnWrap = styled.div`
   display: flex;
-  margin-top: 40px;
+  flex-direction: row-reverse;
+  gap: 8px;
 `
 const CreateCommentsBtn = styled.button`
   background-color: ${props => props.theme.main.ft_color_r};
   padding: 12px 20px;
   text-align: center;
   border-radius: 8px;
-  position: absolute;
-  bottom: 0;
-  right: 0;
+
+  &:focus-visible {
+    outline: 1px solid skyblue;
+  }
 `
 
-const CancelCommentBtn = styled.button`
+const CancelCommentBtn = styled(CreateCommentsBtn)`
   background-color: ${props => props.theme.main.ft_color_g};
-  text-align: center;
-  border-radius: 8px;
-  position: absolute;
-  bottom: 0;
-  right: 120px;
-  padding: 12px 20px;
 `
 
 // 댓글 리스트 전체 묶음
@@ -263,7 +268,7 @@ const CommentsList = styled.ul`
 
 // 댓글 개별 컨트롤 묶음
 const CommentWrap = styled.li`
-  border-bottom: 1px solid #fff;
+  border-bottom: 1px solid ${props => props.theme.themMode.fontColor};
   position: relative;
   display: flex;
   gap: 30px;

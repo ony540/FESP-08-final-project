@@ -1,21 +1,28 @@
 import { createGlobalStyle } from 'styled-components'
-import { theme } from './theme'
 
 export const GlobalStyles = createGlobalStyle`
   html,body {
     font-family: 'Pretendard', sans-serif;
     -ms-overflow-style: none;
-
-    background-color: ${theme.main.bg_color};
-    color: ${theme.main.ft_color_w};
+    background-color: ${props => props.theme.themMode.body};
+    color: ${props => props.theme.themMode.fontColor};
 
     ::-webkit-scrollbar {
     display: none;
-    
     overflow-x: hidden;
-    
     }
   }
+  .a11y-hidden {
+    clip: rect(1px, 1px, 1px, 1px);
+    clip-path: inset(50%);
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+  }
+     
 
   * {
     box-sizing: border-box;
@@ -27,6 +34,10 @@ export const GlobalStyles = createGlobalStyle`
   button {
     all: unset;
     cursor: pointer;
+  }
+
+  textarea{
+    font: inherit;
   }
   .a11y-hidden {
     clip: rect(1px, 1px, 1px, 1px);

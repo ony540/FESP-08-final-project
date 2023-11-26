@@ -20,6 +20,9 @@
       "@utils": ["./utils/index.ts"],
       "@utils/*": ["/utils/*"],
 
+      "@atom": ["./atom/index.ts"],
+      "@atom/*": ["/atom/*"],
+
       //API child
       "@API": ["./API/index.ts"],
       "@API/*": ["/API/*"],
