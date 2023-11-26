@@ -35,6 +35,10 @@ export const GlobalStyles = createGlobalStyle`
     all: unset;
     cursor: pointer;
   }
+
+  textarea{
+    font: inherit;
+  }
   .a11y-hidden {
     clip: rect(1px, 1px, 1px, 1px);
     clip-path: inset(50%);

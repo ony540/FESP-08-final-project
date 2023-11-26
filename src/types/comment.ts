@@ -1,7 +1,7 @@
 export interface UploadCommentProps {
   commentInput: string
-  videoId: string
   usernameInput: string
+  videoId: string
 }
 
 export interface CommentType {

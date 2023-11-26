@@ -1,4 +1,7 @@
 import { deleteComment, getComments, uploadComment } from '@API'
+import { Modal } from '@components/modal/Modal'
+import ModalPortal from '@components/modal/Portal'
+import { useModal } from '@hooks'
 import { CommonXBtn } from '@components/icons'
 import { CommentType } from '@types'
 import { useEffect, useRef, useState } from 'react'
@@ -28,6 +31,8 @@ export const CommentsBox = ({ videoId }: { videoId: string }) => {
       setGradientAnimation(false)
     }, 1000)
   }
+  const { openModal, closeModal } = useModal()
+  const [selectedCommentId, setSelectedCommentId] = useState<number>(0)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -59,9 +64,15 @@ export const CommentsBox = ({ videoId }: { videoId: string }) => {
     setComments(prevData => [uploadedData[0], ...prevData])
   }
 
-  const handleClickDelete = async (id: number) => {
-    await deleteComment(id)
-    setComments(comments.filter(comment => comment.id !== id))
+  const handleDeleteModalOpen = async (id: number) => {
+    setSelectedCommentId(id)
+    openModal('댓글삭제')
+  }
+
+  const handleClickDelete = async () => {
+    closeModal()
+    setComments(comments.filter(comment => comment.id !== selectedCommentId))
+    await deleteComment(selectedCommentId)
   }
 
   useEffect(() => {
@@ -151,6 +162,9 @@ export const CommentsBox = ({ videoId }: { videoId: string }) => {
           </>
         ))}
       </CommentsList>
+      <ModalPortal>
+        <Modal onClick={handleClickDelete} />
+      </ModalPortal>
     </TotalContainer>
   )
 }
