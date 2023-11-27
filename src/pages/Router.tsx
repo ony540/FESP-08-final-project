@@ -1,6 +1,8 @@
 import { createBrowserRouter, type RouteObject } from 'react-router-dom'
 import { Layout, MainPage, DetailPage, SearchPage } from '@pages'
 import { ErrorComponent } from '@components'
+import axios from 'axios'
+import { isProduction } from '@utils'
 
 const generateRoute = (
   path: string,
@@ -13,13 +15,12 @@ const generateRoute = (
     errorElement: <ErrorComponent />,
     children: children,
     loader: async () => {
+      if (isProduction) return
       try {
-        const res = await fetch('/videos/popular.json')
-        if (!res.ok) {
-          throw new Error('Data Fetching Error')
+        {
+          const res: any = await axios('/videos/popular.json')
+          return res.data.items
         }
-        const json = await res.json()
-        return json.items
       } catch (error) {
         console.error('Error fetching Data:', error)
         throw error
