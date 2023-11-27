@@ -11,6 +11,7 @@
     "@types/jest": "^27.5.2",
     "@types/styled-components": "^5.1.30",
     "dotenv": "^16.3.1",
+    "env-cmd": "^10.1.0",
     "react": "^18.2.0",
     "react-app-rewired": "^2.2.1",
     "react-dom": "^18.2.0",
@@ -26,9 +27,11 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "craco start",
-    "build": "craco build",
+    "start": "env-cmd -f .env.development craco start",
+    "build:prod": "craco build",
+    "build:dev": "env-cmd -f .env.development craco build",
     "test": "craco test",
+    "prod": "env-cmd -f .env.production craco start",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -54,6 +57,7 @@
     "@types/react": "^18.2.37",
     "@types/react-dom": "^18.2.15",
     "@types/react-slick": "^0.23.12",
+    "axios": "^1.6.2",
     "eslint": "^8.54.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-prettier": "^5.0.1",

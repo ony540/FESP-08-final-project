@@ -9,6 +9,7 @@ import { useLoaderData } from 'react-router-dom'
 
 export const MainPage = () => {
   const preLoadData: any = useLoaderData()
+  console.log(preLoadData)
 
   return (
     <>
