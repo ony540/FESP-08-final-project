@@ -121,6 +121,10 @@ const ButtonList = styled.ul`
     font-size: ${p => p.theme.customSize.medium};
     padding-top: 8px;
   }
+
+  @media screen and (max-width: 600px) {
+    margin-left: -14px;
+  }
 `
 
 const DescriptionBox = styled.div`
