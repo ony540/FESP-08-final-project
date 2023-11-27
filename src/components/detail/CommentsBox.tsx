@@ -48,7 +48,6 @@ export const CommentsBox = ({ videoId }: { videoId: string }) => {
       return { ...prev, [name]: value }
     })
   }
-  console.log(comments)
 
   const handleUploadForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -119,26 +118,27 @@ export const CommentsBox = ({ videoId }: { videoId: string }) => {
           <div></div>
         </div>
         <BtnWrap>
-          <CreateCommentsBtn type="submit">작성하기</CreateCommentsBtn>
-          <CancelCommentBtn type="button">취소하기</CancelCommentBtn>
+          <CreateCommentsBtn
+            type="submit"
+            disabled={userInput.comment === ''}>
+            작성하기
+          </CreateCommentsBtn>
         </BtnWrap>
       </InputContainer>
 
       <CommentsList>
         {comments?.map(comment => (
-          <>
-            <CommentWrap key={comment.id}>
-              <CommentWriter $getColor={comment.profile_color || ''}>
-                {comment.username.slice(0, 3) || '익명'}
-              </CommentWriter>
-              <Comment>{comment.text}</Comment>
-              <CommentDeleteBtn
-                type="button"
-                onClick={() => handleDeleteModalOpen(comment.id)}>
-                <CommonXBtn isSmall={true} />
-              </CommentDeleteBtn>
-            </CommentWrap>
-          </>
+          <CommentWrap key={comment.id}>
+            <CommentWriter $getColor={comment.profile_color || ''}>
+              {comment.username.slice(0, 3) || '익명'}
+            </CommentWriter>
+            <Comment>{comment.text}</Comment>
+            <CommentDeleteBtn
+              type="button"
+              onClick={() => handleDeleteModalOpen(comment.id)}>
+              <CommonXBtn isSmall={true} />
+            </CommentDeleteBtn>
+          </CommentWrap>
         ))}
       </CommentsList>
       <ModalPortal>
@@ -244,10 +244,11 @@ const CreateCommentsBtn = styled.button`
   &:focus-visible {
     outline: 1px solid skyblue;
   }
-`
 
-const CancelCommentBtn = styled(CreateCommentsBtn)`
-  background-color: ${props => props.theme.main.ft_color_g};
+  &:disabled {
+    background-color: ${props => props.theme.main.ft_color_g};
+    cursor: unset;
+  }
 `
 
 // 댓글 리스트 전체 묶음

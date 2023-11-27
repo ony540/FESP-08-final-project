@@ -4,7 +4,7 @@ import { formatTime } from '@utils'
 import styled from 'styled-components'
 
 interface DetailMainContentProps {
-  detailData: VideoItem | null
+  detailData: VideoItem | null | undefined
   id: string
 }
 
@@ -31,13 +31,13 @@ export const DetailMainContent = ({
           <ButtonList>
             <li>
               <button type="button">
-                <CommonWatchList width={18} />
+                <CommonWatchList width={24} />
                 <span>watchlist</span>
               </button>
             </li>
             <li>
               <button type="button">
-                <CommonShare width={18} />
+                <CommonShare width={24} />
                 <span>share</span>
               </button>
             </li>
@@ -120,6 +120,10 @@ const ButtonList = styled.ul`
     color: ${p => p.theme.main.ft_color_g};
     font-size: ${p => p.theme.customSize.medium};
     padding-top: 8px;
+  }
+
+  @media screen and (max-width: 600px) {
+    margin-left: -14px;
   }
 `
 

@@ -61,6 +61,17 @@ export interface RelatedId {
   videoId: string
 }
 
+export interface RelatedVideoListResponse {
+  etag: string
+  items: RelatedVideoItem[]
+  kind: string
+  nextPageToken: string
+  pageInfo: {
+    resultsPerPage: number
+    totalResults: number
+  }
+}
+
 export interface VideoListResponse {
   etag: string
   items: VideoItem[]
