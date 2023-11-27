@@ -11,41 +11,47 @@ export const ErrorComponent = () => {
     <>
       <GlobalStyles />
       <CommonHeader />
-      <ErrorText>
-        <ErrorHead>{ERROR_TEXTS.headerText}</ErrorHead>
-        <ErrorApology>{ERROR_TEXTS.errorText}</ErrorApology>
-        <ErrorApology>{ERROR_TEXTS.apologyText}</ErrorApology>
-        <MainMove onClick={() => navigate('/')}>
-          {ERROR_TEXTS.returnText}
-        </MainMove>
-      </ErrorText>
+      <Wrap>
+        <ErrorText>
+          <ErrorHead>{ERROR_TEXTS.headerText}</ErrorHead>
+          <ErrorApology>{ERROR_TEXTS.errorText}</ErrorApology>
+          <ErrorApology>{ERROR_TEXTS.apologyText}</ErrorApology>
+          <MainMove onClick={() => navigate('/')}>
+            {ERROR_TEXTS.returnText}
+          </MainMove>
+        </ErrorText>
+      </Wrap>
       <CommonFooter />
     </>
   )
 }
 
+const Wrap = styled.div`
+  margin: 0 auto;
+  max-width: calc(100% - 40px);
+`
 const ErrorText = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 90vh;
+  height: 80vh;
 `
 const ErrorHead = styled.div`
-  font-size: 80px;
-  color: ${props => props.theme.main.ft_color_r};
+  font-size: ${props => props.theme.customSize.xxxlarge};
+  color: ${props => props.theme.themMode.hoverOutlineColor};
   margin-bottom: 60px;
 `
 const ErrorApology = styled.div`
-  font-size: 40px;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  font-size: ${props => props.theme.customSize.xxlarge};
+  margin: 0 auto 20px;
 `
 const MainMove = styled.button`
   font-size: 20px;
   margin-top: 20px;
   padding: 16px;
-  background-color: ${props => props.theme.main.ft_color_r};
-  border: 5px solid ${props => props.theme.main.ft_color_r};
+  color: #fff;
+  background-color: ${props => props.theme.themMode.hoverOutlineColor};
+  border: 5px solid ${props => props.theme.themMode.hoverOutlineColor};
   border-radius: 12px;
 `

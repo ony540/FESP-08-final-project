@@ -25,6 +25,7 @@ export const SearchContent = ({
 
   if (debouncedSearchKeyword && !search.length)
     return <StyledH2>검색된 결과가 없습니다</StyledH2>
+
   return (
     <ContentWrap>
       {search?.map((i: any, idx: any) => (

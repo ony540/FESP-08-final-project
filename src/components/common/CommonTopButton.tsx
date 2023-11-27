@@ -20,7 +20,7 @@ const StyledTopBuuton = styled.button`
   border-radius: 12px;
   width: 50px;
   height: 50px;
-  background-color: ${props => props.theme.main.ft_color_r};
+  background-color: ${p => p.theme.themMode.hoverOutlineColor};
   position: fixed;
   right: 50px;
   bottom: 6%;

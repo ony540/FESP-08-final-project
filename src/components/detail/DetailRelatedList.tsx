@@ -111,7 +111,7 @@ const ThumbnailBoxText = styled.div`
     font-size: 18px;
     font-weight: 600;
     margin-bottom: 4px;
-
+    color: white;
     width: calc(40vw - 28px);
     max-width: 372px;
     overflow: hidden;
@@ -122,5 +122,6 @@ const ThumbnailBoxText = styled.div`
 
   p {
     font-size: ${p => p.theme.customSize.small};
+    color: white;
   }
 `

@@ -51,7 +51,6 @@ export const ContentWrap = styled.ul`
 `
 
 // ContentCard
-
 export const ContentCardWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -59,17 +58,39 @@ export const ContentCardWrapper = styled.div`
   transform-origin: 50% 80%;
   border-radius: 8px;
 
+  @media (min-width: 900px) {
+    transform-origin: 10% 80%;
+  }
+  @media (min-width: 1200px) {
+    transform-origin: 10% 80%;
+  }
+
   &:hover {
-    transform: scale(1.3);
-    background-color: ${p => p.theme.main.bg_color_g};
+    transform: scale(1.2);
+    background-color: ${p => p.theme.themMode.hoverBgColor};
+    box-shadow:
+      0 3px 3.5px ${p => p.theme.themMode.hoverOutlineColor},
+      0 -3px 3.5px ${p => p.theme.themMode.hoverOutlineColor},
+      3px 0 3.5px ${p => p.theme.themMode.hoverOutlineColor},
+      -3px 0 3.5px ${p => p.theme.themMode.hoverOutlineColor};
+
+    outline: 2px solid ${p => p.theme.themMode.hoverOutlineColor};
     position: absolute;
     min-width: 169px;
 
+    @media (min-width: 300px) {
+      width: calc(100% - 15px);
+      position: unset;
+      margin: 30px auto;
+    }
     @media (min-width: 600px) {
       width: calc(50% - 15px);
+      position: absolute;
+      margin: unset;
     }
     @media (min-width: 900px) {
       width: calc(33% - 30px);
+      transform-origin: 50% 80%;
     }
     @media (min-width: 1200px) {
       width: calc(25% - 45px);
@@ -77,6 +98,7 @@ export const ContentCardWrapper = styled.div`
 
     & > h3 {
       padding: 0 8px;
+      color: ${p => p.theme.themMode.fontColor};
     }
 
     & > p {
@@ -88,7 +110,8 @@ export const ContentCardWrapper = styled.div`
 
 export const ThumbnailBoxImg = styled.div<ThumbnailImg>`
   height: ${props => props.$height}px;
-  border-radius: 8px;
+  border-top-right-radius: 8px;
+  border-top-left-radius: 8px;
   box-sizing: border-box;
   background-size: cover;
   background-position: center;
@@ -108,6 +131,9 @@ export const ContentCardTitle = styled.h3`
   white-space: nowrap;
   text-overflow: ellipsis;
   word-break: break-all;
+  &:hover {
+    color: white;
+  }
 `
 
 export const ContentCardDescription = styled.p`
@@ -137,5 +163,6 @@ export const VideoOverlay = styled.div`
 export const VideoIframe = styled.iframe`
   width: 100%;
   height: 100%;
-  border-radius: 8px;
+  border-top-right-radius: 8px;
+  border-top-left-radius: 8px;
 `

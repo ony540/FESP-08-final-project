@@ -1,10 +1,10 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import styled, { keyframes } from 'styled-components'
-import { CommonLogo } from '../icons/CommonLogo'
+import { CommonLogo } from '@icons'
 import { useNavigate } from 'react-router-dom'
-import { CommonSearch } from '../icons/CommonSearch'
+import { CommonSearch } from '@icons'
 import { useEffect, useRef, useState } from 'react'
-import { CommonXBtn } from '../icons/CommonXBtn'
+import { CommonXBtn } from '@icons'
+import { DarkModeButton } from '@common'
 
 interface Truthy {
   $isTrue?: boolean
@@ -25,7 +25,7 @@ export const CommonHeader = () => {
     setIsSearch(!isSearch)
   }
 
-  const onSearchEnter = (e: any) => {
+  const onSearchEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       navigate({
         pathname: '/results',
@@ -39,41 +39,40 @@ export const CommonHeader = () => {
   }, [isSearch])
 
   return (
-    <>
-      <HeaderContainer>
-        {/* 메인 아이콘 */}
-        <LogoIconWrapper onClick={moveToMain}>
-          <CommonLogo
-            width={130}
-            height={50}
-          />
-        </LogoIconWrapper>
+    <HeaderContainer>
+      {/* 메인 아이콘 */}
+      <LogoIconWrapper onClick={moveToMain}>
+        <CommonLogo
+          width={130}
+          height={50}
+        />
+      </LogoIconWrapper>
 
-        {/* 검색 아이콘 */}
-        {
-          <>
-            {isSearch ? (
-              <SearchBarWrapper $isSearch={isSearch}>
-                <StyledInput
-                  onKeyDown={onSearchEnter}
-                  maxLength={30}
-                  ref={inputRef}
-                  $isTrue={isSearch}
-                  onChange={e => setSearchInput(e.target.value)}
-                />
-                <SearchBarXWrapper onClick={handleClickSearch}>
-                  <CommonXBtn />
-                </SearchBarXWrapper>
-              </SearchBarWrapper>
-            ) : (
-              <SearchIconWrapper onClick={handleClickSearch}>
-                <CommonSearch />
-              </SearchIconWrapper>
-            )}
-          </>
-        }
-      </HeaderContainer>
-    </>
+      {
+        <>
+          {isSearch ? (
+            <SearchBarWrapper $isSearch={isSearch}>
+              <StyledInput
+                onKeyDown={onSearchEnter}
+                maxLength={30}
+                ref={inputRef}
+                $isTrue={isSearch}
+                onChange={e => setSearchInput(e.target.value)}
+              />
+              <SearchBarXWrapper onClick={handleClickSearch}>
+                <CommonXBtn />
+              </SearchBarXWrapper>
+            </SearchBarWrapper>
+          ) : (
+            <SearchIconWrapper onClick={handleClickSearch}>
+              <CommonSearch />
+            </SearchIconWrapper>
+          )}
+        </>
+      }
+      {/* 다크모드 버튼 */}
+      <DarkModeButton />
+    </HeaderContainer>
   )
 }
 
@@ -95,6 +94,7 @@ const HeaderContainer = styled.div`
   margin: 0 auto;
   max-width: calc(100% - 70px);
   display: flex;
+  justify-content: space-between;
   align-items: center;
   position: relative;
 `
@@ -111,11 +111,10 @@ const SearchBarWrapper = styled.div<Truthy>`
   border-radius: 8px;
   cursor: pointer;
   position: absolute;
-  right: 10px;
-  display: flex;
-  height: 40px;
+  right: 80px;
+  height: 30px;
   width: 330px;
-  background-color: #fff;
+  background-color: ${props => props.theme.backgroundColor};
   z-index: 0;
   animation: ${animating} 0.4s forwards;
 `
@@ -126,7 +125,7 @@ const SearchBarXWrapper = styled.div`
   align-items: center;
   cursor: pointer;
   position: absolute;
-  right: 10px;
+  right: 8px;
   z-index: 1;
 `
 
@@ -136,16 +135,17 @@ const SearchIconWrapper = styled.div`
   align-items: center;
   cursor: pointer;
   position: absolute;
-  right: 20px;
+  right: 86px;
+  transition: none;
 `
 
 // SEARCH INPUT
 const StyledInput = styled.input<Truthy>`
   position: absolute;
-  padding: 8px 12px;
+  padding: 6px 12px;
   outline: none;
-  border: none;
-  border-radius: 8px;
+  border: 1.6px solid ${props => props.theme.themMode.fontColor};
+  border-radius: 20px;
   animation: inherit;
   font-size: ${props => props.theme.customSize.large};
   z-index: 1;

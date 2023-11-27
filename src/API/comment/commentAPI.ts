@@ -16,12 +16,19 @@ export const getComments = async (videoId: string) => {
 
 export const uploadComment = async ({
   commentInput,
-  videoId
+  usernameInput,
+  videoId,
+  profileColor
 }: UploadCommentProps) => {
   try {
     const { data, error } = await supabase
       .from(TABLE_NAME)
-      .insert({ text: commentInput, video_id: videoId })
+      .insert({
+        text: commentInput,
+        username: usernameInput,
+        video_id: videoId,
+        profile_color: profileColor
+      })
       .select()
     if (error) console.log('error when uploadComment', error)
     return data
@@ -30,10 +37,9 @@ export const uploadComment = async ({
   }
 }
 
-export const deleteComment = async (id: string) => {
+export const deleteComment = async (id: number) => {
   try {
     await supabase.from(TABLE_NAME).delete().eq('id', id).select()
-    // setComments(comments.filter(comment => comment.id !== id))
   } catch (error) {
     console.log('error when getComments', error)
   }
