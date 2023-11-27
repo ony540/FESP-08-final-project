@@ -59,20 +59,13 @@ export const ContentCardWrapper = styled.div`
   border-radius: 8px;
 
   @media (min-width: 900px) {
-    transform-origin: 10% 80%;
-  }
-  @media (min-width: 1200px) {
-    transform-origin: 10% 80%;
+    transform-origin: calc(50% - 20px) 80%;
   }
 
   &:hover {
     transform: scale(1.2);
     background-color: ${p => p.theme.themMode.hoverBgColor};
-    box-shadow:
-      0 3px 3.5px ${p => p.theme.themMode.hoverOutlineColor},
-      0 -3px 3.5px ${p => p.theme.themMode.hoverOutlineColor},
-      3px 0 3.5px ${p => p.theme.themMode.hoverOutlineColor},
-      -3px 0 3.5px ${p => p.theme.themMode.hoverOutlineColor};
+    box-shadow: 0 0 3.5px 3.5px ${p => p.theme.themMode.hoverOutlineColor};
 
     outline: 2px solid ${p => p.theme.themMode.hoverOutlineColor};
     position: absolute;
@@ -90,10 +83,11 @@ export const ContentCardWrapper = styled.div`
     }
     @media (min-width: 900px) {
       width: calc(33% - 30px);
-      transform-origin: 50% 80%;
+      margin-left: 4px;
     }
     @media (min-width: 1200px) {
       width: calc(25% - 45px);
+      margin-left: 8px;
     }
 
     & > h3 {
