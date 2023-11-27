@@ -15,7 +15,7 @@ const generateRoute = (
     errorElement: <ErrorComponent />,
     children: children,
     loader: async () => {
-      if (isProduction) return
+      if (isProduction) return null
       try {
         {
           const res: any = await axios('/videos/popular.json')

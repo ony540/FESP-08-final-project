@@ -4,7 +4,7 @@ import { formatTime } from '@utils'
 import styled from 'styled-components'
 
 interface DetailMainContentProps {
-  detailData: VideoItem | null
+  detailData: VideoItem | null | undefined
   id: string
 }
 
@@ -31,13 +31,13 @@ export const DetailMainContent = ({
           <ButtonList>
             <li>
               <button type="button">
-                <CommonWatchList width={18} />
+                <CommonWatchList width={24} />
                 <span>watchlist</span>
               </button>
             </li>
             <li>
               <button type="button">
-                <CommonShare width={18} />
+                <CommonShare width={24} />
                 <span>share</span>
               </button>
             </li>
