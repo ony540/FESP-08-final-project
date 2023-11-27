@@ -43,14 +43,15 @@ export const SearchPage = () => {
     setSearchItem(filteredItems)
   }, [detailId])
 
+  /** 자동으로 pathname을 지정해주는 용도 */
   useEffect(() => {
-    if (currentPath.includes('results')) {
+    if (currentPath === '/results' && !query.get('search_query')) {
       navigate({
         pathname: '/results',
         search: `?search_query=${detailId || ''}`
       })
     }
-  }, [currentPath])
+  }, [currentPath, detailId, query])
 
   const renderContents = () => {
     if (searchItem.length <= 0 || detailId === '') {

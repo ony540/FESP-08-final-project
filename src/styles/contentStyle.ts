@@ -57,11 +57,24 @@ export const ContentCardWrapper = styled.div`
   transition: all 0.3s;
   transform-origin: 50% 80%;
   border-radius: 8px;
+
+  @media (min-width: 900px) {
+    transform-origin: 10% 80%;
+  }
+  @media (min-width: 1200px) {
+    transform-origin: 10% 80%;
+  }
+
   &:hover {
     transform: scale(1.2);
     background-color: ${p => p.theme.themMode.hoverBgColor};
-    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.12);
-    outline: 2px solid ${p => p.theme.main.ft_color_p};
+    box-shadow:
+      0 3px 3.5px ${p => p.theme.themMode.hoverOutlineColor},
+      0 -3px 3.5px ${p => p.theme.themMode.hoverOutlineColor},
+      3px 0 3.5px ${p => p.theme.themMode.hoverOutlineColor},
+      -3px 0 3.5px ${p => p.theme.themMode.hoverOutlineColor};
+
+    outline: 2px solid ${p => p.theme.themMode.hoverOutlineColor};
     position: absolute;
     min-width: 169px;
 
@@ -77,6 +90,7 @@ export const ContentCardWrapper = styled.div`
     }
     @media (min-width: 900px) {
       width: calc(33% - 30px);
+      transform-origin: 50% 80%;
     }
     @media (min-width: 1200px) {
       width: calc(25% - 45px);
@@ -96,7 +110,8 @@ export const ContentCardWrapper = styled.div`
 
 export const ThumbnailBoxImg = styled.div<ThumbnailImg>`
   height: ${props => props.$height}px;
-  border-radius: 8px;
+  border-top-right-radius: 8px;
+  border-top-left-radius: 8px;
   box-sizing: border-box;
   background-size: cover;
   background-position: center;
@@ -148,5 +163,6 @@ export const VideoOverlay = styled.div`
 export const VideoIframe = styled.iframe`
   width: 100%;
   height: 100%;
-  border-radius: 8px;
+  border-top-right-radius: 8px;
+  border-top-left-radius: 8px;
 `

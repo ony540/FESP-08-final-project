@@ -25,13 +25,15 @@ const darkColors = {
   body: '#0A070B',
   fontColor: '#fff',
   ButtonColor: '#ffffff80',
-  hoverBgColor: '#191919'
+  hoverBgColor: '#191919',
+  hoverOutlineColor: '#dd2d47'
 }
 const lightColors = {
   body: '#fff',
   fontColor: '#000',
   ButtonColor: '#dedede99',
-  hoverBgColor: '#fff'
+  hoverBgColor: '#fff',
+  hoverOutlineColor: '#1884f7'
 }
 
 export const lightTheme = {

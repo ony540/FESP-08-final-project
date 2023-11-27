@@ -17,7 +17,8 @@ export const getComments = async (videoId: string) => {
 export const uploadComment = async ({
   commentInput,
   usernameInput,
-  videoId
+  videoId,
+  profileColor
 }: UploadCommentProps) => {
   try {
     const { data, error } = await supabase
@@ -25,7 +26,8 @@ export const uploadComment = async ({
       .insert({
         text: commentInput,
         username: usernameInput,
-        video_id: videoId
+        video_id: videoId,
+        profile_color: profileColor
       })
       .select()
     if (error) console.log('error when uploadComment', error)

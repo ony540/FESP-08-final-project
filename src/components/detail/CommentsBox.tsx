@@ -6,6 +6,7 @@ import { CommonXBtn } from '@components/icons'
 import { CommentType } from '@types'
 import { useEffect, useRef, useState } from 'react'
 import styled, { css, keyframes } from 'styled-components'
+import { getRandomColor } from '@utils'
 
 interface Random {
   $getColor?: any
@@ -13,15 +14,19 @@ interface Random {
 
 const initailUserInput = {
   comment: '',
-  username: ''
+  username: '',
+  profileColor: ''
 }
+
 export const CommentsBox = ({ videoId }: { videoId: string }) => {
   const [comments, setComments] = useState<CommentType[]>([])
   const commentInputRef = useRef<HTMLTextAreaElement>(null)
   const [userInput, setUserInput] = useState({
     comment: '',
-    username: ''
+    username: '',
+    profileColor: ''
   })
+
   const { openModal, closeModal } = useModal()
   const [selectedCommentId, setSelectedCommentId] = useState<number>(0)
 
@@ -43,12 +48,14 @@ export const CommentsBox = ({ videoId }: { videoId: string }) => {
       return { ...prev, [name]: value }
     })
   }
+  console.log(comments)
 
   const handleUploadForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const uploadedData = (await uploadComment({
       commentInput: userInput.comment,
       usernameInput: userInput.username,
+      profileColor: getRandomColor(),
       videoId
     })) as CommentType[]
     setUserInput(initailUserInput)
@@ -73,22 +80,6 @@ export const CommentsBox = ({ videoId }: { videoId: string }) => {
       textarea.style.height = `${textarea.scrollHeight - 8}px`
     }
   }, [userInput.comment])
-
-  const getRandomColor = () => {
-    const colorArr = [
-      '#04d9ff',
-      '#ff9933',
-      '#fe4164',
-      '#fe019a',
-      '#bc13fe',
-      '#ff073a',
-      '#2C2731',
-      '#4E495C',
-      '#8C84A8'
-    ]
-    const randomIndex = Math.floor(Math.random() * colorArr.length)
-    return colorArr[randomIndex]
-  }
 
   return (
     <TotalContainer>
@@ -137,7 +128,7 @@ export const CommentsBox = ({ videoId }: { videoId: string }) => {
         {comments?.map(comment => (
           <>
             <CommentWrap key={comment.id}>
-              <CommentWriter $getColor={getRandomColor}>
+              <CommentWriter $getColor={comment.profile_color || ''}>
                 {comment.username.slice(0, 3) || '익명'}
               </CommentWriter>
               <Comment>{comment.text}</Comment>
@@ -244,7 +235,8 @@ const BtnWrap = styled.div`
   gap: 8px;
 `
 const CreateCommentsBtn = styled.button`
-  background-color: ${props => props.theme.main.ft_color_r};
+  background-color: ${p => p.theme.themMode.hoverOutlineColor};
+  color: #fff;
   padding: 12px 20px;
   text-align: center;
   border-radius: 8px;
@@ -282,7 +274,7 @@ const CommentWrap = styled.li`
 
 // 댓쓴이
 const CommentWriter = styled.p<Random>`
-  background-color: ${props => props.$getColor()};
+  background-color: ${props => props.$getColor};
   color: #fff;
   border-radius: 50%;
   width: 70px;
