@@ -84,14 +84,16 @@ export const MainThumbnail = ({
           {randomItems &&
             randomItems.map((item, index) => (
               <div key={index}>
-                <ThumbnailBoxImg
-                  $height={item.snippet.thumbnails.maxres.height / 1.5}
-                  $image={item.snippet.thumbnails.maxres.url}>
-                  <PlayBtnBox onClick={() => handlePlayButtonClick(item.id)}>
-                    <CommonPlayLogo />
-                    <PlayBtnText>Play Now</PlayBtnText>
-                  </PlayBtnBox>
-                </ThumbnailBoxImg>
+                {item.snippet.thumbnails.maxres && (
+                  <ThumbnailBoxImg
+                    $height={item.snippet.thumbnails.maxres.height / 1.5}
+                    $image={item.snippet.thumbnails.maxres.url}>
+                    <PlayBtnBox onClick={() => handlePlayButtonClick(item.id)}>
+                      <CommonPlayLogo />
+                      <PlayBtnText>Play Now</PlayBtnText>
+                    </PlayBtnBox>
+                  </ThumbnailBoxImg>
+                )}
               </div>
             ))}
         </Slider>

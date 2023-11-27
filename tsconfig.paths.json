@@ -30,6 +30,9 @@
       "@comment": ["./API/comment/index.ts"],
       "@comment/*": ["/API/comment/*"],
 
+      "@main": ["./API/main/index.ts"],
+      "@main/*": ["/API/main/*"],
+
       // component child
       "@components": ["./components/index.ts"],
       "@components/*": ["./components/*"],

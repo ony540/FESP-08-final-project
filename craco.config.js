@@ -17,6 +17,7 @@ module.exports = {
       //API child
       '@API': path.resolve(__dirname, 'src/API'),
       '@comment': path.resolve(__dirname, 'src/API/comment'),
+      '@main': path.resolve(__dirname, 'src/API/main'),
 
       // component child
       '@components': path.resolve(__dirname, 'src/components'),
