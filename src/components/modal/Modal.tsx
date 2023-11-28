@@ -1,3 +1,4 @@
+import { COMMENT_TEXT } from '@constants'
 import { useModal } from '@hooks'
 import styled from 'styled-components'
 
@@ -15,18 +16,18 @@ export const Modal = ({ onClick }: ModalProps) => {
   return (
     <ModalBackdrop onClick={closeModal}>
       <ModalWrapper>
-        <p>댓글을 삭제할까요?</p>
+        <p>{COMMENT_TEXT.QUESTION_MODAL_COMMENT_DELETE}</p>
         <ButtonBox>
           <button
             type="button"
             onClick={closeModal}
             aria-label="모달 닫기">
-            취소
+            {COMMENT_TEXT.CANCEL}
           </button>
           <button
             onClick={onClick}
             type="button">
-            삭제
+            {COMMENT_TEXT.DELETE}
           </button>
         </ButtonBox>
       </ModalWrapper>

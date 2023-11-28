@@ -9,7 +9,9 @@ export const IsNotSearched = () => {
       <ErrorText>
         <ErrorHead>{IS_NOT_SEARCH_RESULTS[0]}</ErrorHead>
         <ErrorApology>{IS_NOT_SEARCH_RESULTS[1]}</ErrorApology>
-        <MainMove onClick={() => navigate('/')}>메인 페이지로 이동</MainMove>
+        <MainMove onClick={() => navigate('/')}>
+          {IS_NOT_SEARCH_RESULTS[2]}
+        </MainMove>
       </ErrorText>
     </Wrap>
   )

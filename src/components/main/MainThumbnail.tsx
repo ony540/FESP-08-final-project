@@ -1,12 +1,12 @@
 /* eslint-disable react/prop-types */
-import { VideoItem } from '@types'
 import styled from 'styled-components'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import { useNavigate } from 'react-router-dom'
 import { CommonArrow, CommonPlayLogo } from '@components/icons'
-import { useMemo } from 'react'
+import { isProduction } from '@utils'
+import { VideoItem, VideoListResponse } from '@types'
 
 interface Slide {
   $image?: string
@@ -17,54 +17,60 @@ interface NextArrowProps {
   onClick?: React.MouseEventHandler<HTMLButtonElement>
 }
 
-const getRandomItems = (array: VideoItem[], count: number) => {
-  const copyArray = [...array]
-  const resultArray: VideoItem[] = []
-
-  for (let i = 0; i < count; i++) {
-    const randomIndex = Math.floor(Math.random() * copyArray.length)
-    const randomData = copyArray[randomIndex]
-
-    if (!resultArray.includes(randomData)) {
-      resultArray.push(randomData)
-    } else {
-      i--
-    }
-  }
-
-  return resultArray
-}
-
-export const MainThumbnail = ({
-  preLoadData
-}: {
-  preLoadData: VideoItem[]
-}) => {
+export const MainThumbnail = ({ preLoadData }: { preLoadData: any }) => {
   const navigate = useNavigate()
+  const propData = isProduction ? preLoadData : preLoadData.items
 
-  const randomItems = useMemo(() => {
-    return getRandomItems(preLoadData, 5)
-  }, [])
+  const renderContents = () => {
+    return isProduction ? (
+      <>
+        <Slider {...settings}>
+          {propData &&
+            propData.map((i: VideoListResponse) => {
+              return i.items.slice(0, 5).map((item, index) => (
+                <div key={index}>
+                  {item.snippet.thumbnails.maxres && (
+                    <ThumbnailBoxImg
+                      $height={item.snippet.thumbnails.maxres.height / 1.5}
+                      $image={item.snippet.thumbnails.maxres.url}>
+                      <PlayBtnBox
+                        onClick={() => handlePlayButtonClick(item.id)}>
+                        <CommonPlayLogo />
+                        <PlayBtnText>Play Now</PlayBtnText>
+                      </PlayBtnBox>
+                    </ThumbnailBoxImg>
+                  )}
+                </div>
+              ))
+            })}
+        </Slider>
+      </>
+    ) : (
+      <>
+        <Slider {...settings}>
+          {propData &&
+            propData.map((item: VideoItem, index: number) => (
+              <div key={index}>
+                {
+                  <ThumbnailBoxImg
+                    $height={item.snippet.thumbnails.maxres.height / 1.5}
+                    $image={item.snippet.thumbnails.maxres.url}>
+                    <PlayBtnBox onClick={() => handlePlayButtonClick(item.id)}>
+                      <CommonPlayLogo />
+                      <PlayBtnText>Play Now</PlayBtnText>
+                    </PlayBtnBox>
+                  </ThumbnailBoxImg>
+                }
+              </div>
+            ))}
+        </Slider>
+      </>
+    )
+  }
 
   const handlePlayButtonClick = (id: string) => {
     navigate(`/detail/${id}`)
   }
-
-  const CustomPrev: React.FC<React.HTMLAttributes<HTMLButtonElement>> = ({
-    onClick
-  }: NextArrowProps) => (
-    <Prev onClick={onClick}>
-      <CommonArrow />
-    </Prev>
-  )
-
-  const CustomNext: React.FC<React.HTMLAttributes<HTMLButtonElement>> = ({
-    onClick
-  }: NextArrowProps) => (
-    <Next onClick={onClick}>
-      <CommonArrow rotate={180} />
-    </Next>
-  )
 
   const settings = {
     dots: false,
@@ -79,23 +85,7 @@ export const MainThumbnail = ({
 
   return (
     <>
-      <Wrap>
-        <Slider {...settings}>
-          {randomItems &&
-            randomItems.map((item, index) => (
-              <div key={index}>
-                <ThumbnailBoxImg
-                  $height={item.snippet.thumbnails.maxres.height / 1.5}
-                  $image={item.snippet.thumbnails.maxres.url}>
-                  <PlayBtnBox onClick={() => handlePlayButtonClick(item.id)}>
-                    <CommonPlayLogo />
-                    <PlayBtnText>Play Now</PlayBtnText>
-                  </PlayBtnBox>
-                </ThumbnailBoxImg>
-              </div>
-            ))}
-        </Slider>
-      </Wrap>
+      <Wrap>{renderContents()}</Wrap>
     </>
   )
 }
@@ -165,3 +155,18 @@ const Prev = styled(SlideButton)`
 const Next = styled(SlideButton)`
   right: 16px;
 `
+const CustomPrev: React.FC<React.HTMLAttributes<HTMLButtonElement>> = ({
+  onClick
+}: NextArrowProps) => (
+  <Prev onClick={onClick}>
+    <CommonArrow />
+  </Prev>
+)
+
+const CustomNext: React.FC<React.HTMLAttributes<HTMLButtonElement>> = ({
+  onClick
+}: NextArrowProps) => (
+  <Next onClick={onClick}>
+    <CommonArrow rotate={180} />
+  </Next>
+)

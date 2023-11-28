@@ -7,6 +7,7 @@ import { CommentType } from '@types'
 import { useEffect, useRef, useState } from 'react'
 import styled, { css, keyframes } from 'styled-components'
 import { getRandomColor } from '@utils'
+import { COMMENT_TEXT } from '@constants'
 
 interface Random {
   $getColor?: any
@@ -21,21 +22,16 @@ const initailUserInput = {
 export const CommentsBox = ({ videoId }: { videoId: string }) => {
   const [comments, setComments] = useState<CommentType[]>([])
   const commentInputRef = useRef<HTMLTextAreaElement>(null)
-  const [userInput, setUserInput] = useState({
-    comment: '',
-    username: '',
-    profileColor: ''
-  })
-
-  const { openModal, closeModal } = useModal()
   const [selectedCommentId, setSelectedCommentId] = useState<number>(0)
+  const { openModal, closeModal } = useModal()
+  const [userInput, setUserInput] = useState(initailUserInput)
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchSupaBaseComments = async () => {
       const data: any = await getComments(videoId)
       setComments(data)
     }
-    fetchData()
+    fetchSupaBaseComments()
   }, [])
 
   const handleInputChange = (
@@ -63,7 +59,7 @@ export const CommentsBox = ({ videoId }: { videoId: string }) => {
 
   const handleDeleteModalOpen = async (id: number) => {
     setSelectedCommentId(id)
-    openModal('댓글삭제')
+    openModal(COMMENT_TEXT.MODAL_DELETE)
   }
 
   const handleClickDelete = async () => {
@@ -97,14 +93,14 @@ export const CommentsBox = ({ videoId }: { videoId: string }) => {
           <label
             htmlFor="commentUsername"
             className="a11y-hidden">
-            댓글 작성 유저
+            {COMMENT_TEXT.COMMENT_UPLOAD_USER}
           </label>
         </div>
         <div>
           <label
             htmlFor="commentInput"
             className="a11y-hidden">
-            댓글 달기
+            {COMMENT_TEXT.COMMENT_UPLOAD}
           </label>
           <CommentInput
             id="commentInput"
@@ -115,13 +111,13 @@ export const CommentsBox = ({ videoId }: { videoId: string }) => {
             ref={commentInputRef}
             autoComplete="off"
           />
-          <div></div>
+          <div className="animating"></div>
         </div>
         <BtnWrap>
           <CreateCommentsBtn
             type="submit"
             disabled={userInput.comment === ''}>
-            작성하기
+            {COMMENT_TEXT.COMMENT_WRITE}
           </CreateCommentsBtn>
         </BtnWrap>
       </InputContainer>
@@ -130,7 +126,7 @@ export const CommentsBox = ({ videoId }: { videoId: string }) => {
         {comments?.map(comment => (
           <CommentWrap key={comment.id}>
             <CommentWriter $getColor={comment.profile_color || ''}>
-              {comment.username.slice(0, 3) || '익명'}
+              {comment.username.slice(0, 3) || COMMENT_TEXT.ANONYMOUS}
             </CommentWriter>
             <Comment>{comment.text}</Comment>
             <CommentDeleteBtn
@@ -234,7 +230,7 @@ const BtnWrap = styled.div`
   flex-direction: row-reverse;
   gap: 8px;
 `
-const CreateCommentsBtn = styled.button`
+export const CreateCommentsBtn = styled.button`
   background-color: ${p => p.theme.themMode.hoverOutlineColor};
   color: #fff;
   padding: 12px 20px;

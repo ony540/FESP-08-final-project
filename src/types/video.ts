@@ -76,7 +76,7 @@ export interface VideoListResponse {
   etag: string
   items: VideoItem[]
   kind: string
-  nextPageToken: string
+  nextPageToken?: string
   pageInfo: {
     resultsPerPage: number
     totalResults: number
