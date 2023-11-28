@@ -6,7 +6,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import styled from 'styled-components'
 
 interface DetailRelatedListProps {
-  relatedData: RelatedVideoItem[] | null
+  relatedData: RelatedVideoItem[] | null | undefined
 }
 
 interface ThumbnailImg {

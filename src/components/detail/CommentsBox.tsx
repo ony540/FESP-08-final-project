@@ -114,30 +114,27 @@ export const CommentsBox = ({ videoId }: { videoId: string }) => {
           <div className="animating"></div>
         </div>
         <BtnWrap>
-          <CreateCommentsBtn type="submit">
+          <CreateCommentsBtn
+            type="submit"
+            disabled={userInput.comment === ''}>
             {COMMENT_TEXT.COMMENT_WRITE}
           </CreateCommentsBtn>
-          <CancelCommentBtn type="button">
-            {COMMENT_TEXT.COMMENT_CANCEL}
-          </CancelCommentBtn>
         </BtnWrap>
       </InputContainer>
 
       <CommentsList>
         {comments?.map(comment => (
-          <>
-            <CommentWrap key={comment.id}>
-              <CommentWriter $getColor={comment.profile_color || ''}>
-                {comment.username.slice(0, 3) || COMMENT_TEXT.ANONYMOUS}
-              </CommentWriter>
-              <Comment>{comment.text}</Comment>
-              <CommentDeleteBtn
-                type="button"
-                onClick={() => handleDeleteModalOpen(comment.id)}>
-                <CommonXBtn isSmall={true} />
-              </CommentDeleteBtn>
-            </CommentWrap>
-          </>
+          <CommentWrap key={comment.id}>
+            <CommentWriter $getColor={comment.profile_color || ''}>
+              {comment.username.slice(0, 3) || COMMENT_TEXT.ANONYMOUS}
+            </CommentWriter>
+            <Comment>{comment.text}</Comment>
+            <CommentDeleteBtn
+              type="button"
+              onClick={() => handleDeleteModalOpen(comment.id)}>
+              <CommonXBtn isSmall={true} />
+            </CommentDeleteBtn>
+          </CommentWrap>
         ))}
       </CommentsList>
       <ModalPortal>
@@ -243,10 +240,11 @@ export const CreateCommentsBtn = styled.button`
   &:focus-visible {
     outline: 1px solid skyblue;
   }
-`
 
-const CancelCommentBtn = styled(CreateCommentsBtn)`
-  background-color: ${props => props.theme.main.ft_color_g};
+  &:disabled {
+    background-color: ${props => props.theme.main.ft_color_g};
+    cursor: unset;
+  }
 `
 
 // 댓글 리스트 전체 묶음

@@ -1,4 +1,3 @@
-//useObserver
 import { useCallback, useEffect, useRef } from 'react'
 
 export const useObserver = (
@@ -6,6 +5,7 @@ export const useObserver = (
   fetchNextPage: () => void,
   isLoading: boolean
 ) => {
+  //스크롤 감지를 위한 IntersectionObserver API
   const observerRef = useRef<HTMLDivElement>(null)
 
   const handleObserver = useCallback(
@@ -24,7 +24,6 @@ export const useObserver = (
     const observer = new IntersectionObserver(handleObserver, option)
     if (element) {
       observer.observe(element)
-
       return () => observer.unobserve(element)
     }
   }, [fetchNextPage, handleObserver, isLoading])
