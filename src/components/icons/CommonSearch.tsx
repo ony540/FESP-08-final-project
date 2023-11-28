@@ -3,7 +3,6 @@ import { useRecoilValue } from 'recoil'
 
 export const CommonSearch = () => {
   const isDark = useRecoilValue(themeState)
-
   const color = isDark ? 'white' : 'black'
   return (
     <svg

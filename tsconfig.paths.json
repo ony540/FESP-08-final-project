@@ -30,6 +30,9 @@
       "@comment": ["./API/comment/index.ts"],
       "@comment/*": ["/API/comment/*"],
 
+      "@youtube": ["./API/youtube/index.ts"],
+      "@youtube/*": ["/API/youtube/*"],
+
       // component child
       "@components": ["./components/index.ts"],
       "@components/*": ["./components/*"],

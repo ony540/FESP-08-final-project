@@ -7,9 +7,6 @@ const commons = {
     ft_color_g: '#807E81',
     hr_color_b: '#363536'
   },
-  randomColor: {},
-  greyScale: {},
-  subColor: {},
   customSize: {
     tiny: '10px',
     small: '12px',

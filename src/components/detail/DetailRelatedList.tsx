@@ -6,7 +6,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import styled from 'styled-components'
 
 interface DetailRelatedListProps {
-  relatedData: RelatedVideoItem[] | null
+  relatedData: RelatedVideoItem[] | null | undefined
 }
 
 interface ThumbnailImg {
@@ -55,7 +55,10 @@ export const DetailRelatedList = ({ relatedData }: DetailRelatedListProps) => {
                 <h4>{item.snippet.title}</h4>
                 <p>
                   {item.snippet.channelTitle} •
-                  <time> {formatTime(item.snippet.publishedAt as string)}</time>
+                  <time>
+                    {' '}
+                    {formatTime(item.snippet.publishedAt.toString())}
+                  </time>
                 </p>
               </ThumbnailBoxText>
             </ThumbnailBoxImg>

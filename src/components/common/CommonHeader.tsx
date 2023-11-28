@@ -7,7 +7,6 @@ import { CommonXBtn } from '@icons'
 import { DarkModeButton } from '@common'
 
 interface Truthy {
-  $isTrue?: boolean
   $isSearch?: boolean
 }
 
@@ -39,9 +38,11 @@ export const CommonHeader = () => {
   }, [isSearch])
 
   return (
-    <HeaderContainer>
+    <HeaderContainer $isSearch={isSearch}>
       {/* 메인 아이콘 */}
-      <LogoIconWrapper onClick={moveToMain}>
+      <LogoIconWrapper
+        onClick={moveToMain}
+        $isSearch={isSearch}>
         <CommonLogo
           width={130}
           height={50}
@@ -51,12 +52,11 @@ export const CommonHeader = () => {
       {
         <>
           {isSearch ? (
-            <SearchBarWrapper $isSearch={isSearch}>
+            <SearchBarWrapper>
               <StyledInput
                 onKeyDown={onSearchEnter}
                 maxLength={30}
                 ref={inputRef}
-                $isTrue={isSearch}
                 onChange={e => setSearchInput(e.target.value)}
               />
               <SearchBarXWrapper onClick={handleClickSearch}>
@@ -70,6 +70,7 @@ export const CommonHeader = () => {
           )}
         </>
       }
+
       {/* 다크모드 버튼 */}
       <DarkModeButton />
     </HeaderContainer>
@@ -83,12 +84,21 @@ const animating = keyframes`
   }
 
   to {
-    width: 300px;
+    width:300px
+  }
+`
+const animatingMoreBig = keyframes`
+  from {
+    width: 20px;
+  }
+
+  to {
+    width: calc(100% - 100px);
   }
 `
 
 // HEADER CONTAINER
-const HeaderContainer = styled.div`
+const HeaderContainer = styled.div<Truthy>`
   position: relative;
   padding: 12px;
   margin: 0 auto;
@@ -97,11 +107,20 @@ const HeaderContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   position: relative;
+
+  @media screen and (max-width: 585px) {
+    height: 76.5px;
+    flex-direction: ${p => p.$isSearch && 'row-reverse'};
+  }
 `
 
 // HEADER LOGO WRAP
-const LogoIconWrapper = styled.div`
+const LogoIconWrapper = styled.div<Truthy>`
   cursor: pointer;
+
+  @media screen and (max-width: 585px) {
+    display: ${p => p.$isSearch && 'none'};
+  }
 `
 
 // SEARCH BAR CONTAINER
@@ -113,10 +132,13 @@ const SearchBarWrapper = styled.div<Truthy>`
   position: absolute;
   right: 80px;
   height: 30px;
-  width: 330px;
   background-color: ${props => props.theme.backgroundColor};
   z-index: 0;
   animation: ${animating} 0.4s forwards;
+
+  @media screen and (max-width: 585px) {
+    animation: ${animatingMoreBig} 0.4s forwards;
+  }
 `
 
 // X BTN
@@ -142,11 +164,11 @@ const SearchIconWrapper = styled.div`
 // SEARCH INPUT
 const StyledInput = styled.input<Truthy>`
   position: absolute;
+  width: 100%;
   padding: 6px 12px;
   outline: none;
   border: 1.6px solid ${props => props.theme.themMode.fontColor};
   border-radius: 20px;
-  animation: inherit;
   font-size: ${props => props.theme.customSize.large};
   z-index: 1;
 

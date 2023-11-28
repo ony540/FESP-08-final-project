@@ -15,14 +15,12 @@ const generateRoute = (
     errorElement: <ErrorComponent />,
     children: children,
     loader: async () => {
-      if (isProduction) return
+      if (isProduction) return null
       try {
-        {
-          const res: any = await axios('/videos/popular.json')
-          return res.data.items
-        }
+        const res: any = await axios('/videos/popular.json')
+        return res.data
       } catch (error) {
-        console.error('Error fetching Data:', error)
+        console.error('LOADER 에러:', error)
         throw error
       }
     }
