@@ -7,18 +7,15 @@ import { MoonIcon, SunIcon } from '@icons'
 type themeStyleProps = {
   $theme: ThemeFlag
 }
+
 export const DarkModeButton = () => {
   const [theme, setTheme] = useRecoilState<ThemeFlag>(themeState)
   const { LIGHT, DARK } = ThemeFlag
 
   const handleChangeTheme = useCallback((): void => {
-    if (theme === DARK) {
-      localStorage.setItem('theme', LIGHT as unknown as string)
-      setTheme(LIGHT)
-    } else {
-      localStorage.setItem('theme', DARK as unknown as string)
-      setTheme(DARK)
-    }
+    const newTheme = theme === DARK ? LIGHT : DARK
+    localStorage.setItem('theme', newTheme.toString())
+    setTheme(newTheme)
   }, [DARK, LIGHT, setTheme, theme])
 
   return (

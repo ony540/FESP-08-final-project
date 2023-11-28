@@ -55,7 +55,10 @@ export const DetailRelatedList = ({ relatedData }: DetailRelatedListProps) => {
                 <h4>{item.snippet.title}</h4>
                 <p>
                   {item.snippet.channelTitle} •
-                  <time> {formatTime(item.snippet.publishedAt as string)}</time>
+                  <time>
+                    {' '}
+                    {formatTime(item.snippet.publishedAt.toString())}
+                  </time>
                 </p>
               </ThumbnailBoxText>
             </ThumbnailBoxImg>

@@ -18,9 +18,9 @@ const generateRoute = (
       if (isProduction) return null
       try {
         const res: any = await axios('/videos/popular.json')
-        return res.data.items
+        return res.data
       } catch (error) {
-        console.error('데이터를 불러오는 중 에러 발생:', error)
+        console.error('LOADER 에러:', error)
         throw error
       }
     }

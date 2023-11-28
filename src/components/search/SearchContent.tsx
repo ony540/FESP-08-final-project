@@ -1,3 +1,4 @@
+import { IS_NOT_SEARCH_RESULTS } from '@constants'
 import {
   ContentCardDescription,
   ContentCardTitle,
@@ -24,7 +25,7 @@ export const SearchContent = ({
   }
 
   if (debouncedSearchKeyword && !search.length)
-    return <StyledH2>검색된 결과가 없습니다</StyledH2>
+    return <StyledH2>{IS_NOT_SEARCH_RESULTS[3]}</StyledH2>
 
   return (
     <ContentWrap>

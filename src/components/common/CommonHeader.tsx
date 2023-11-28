@@ -70,6 +70,7 @@ export const CommonHeader = () => {
           )}
         </>
       }
+
       {/* 다크모드 버튼 */}
       <DarkModeButton />
     </HeaderContainer>
