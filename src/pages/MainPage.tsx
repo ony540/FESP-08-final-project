@@ -1,13 +1,6 @@
 import { useInfiniteQuery } from '@tanstack/react-query'
 import { getMainData } from '@API'
-import {
-  CommonFooter,
-  CommonHeader,
-  CommonTopButton,
-  MainContent,
-  MainThumbnail,
-  Spinner
-} from '@components'
+import { MainContent, MainBanner, Spinner } from '@components'
 import { isProduction } from '@utils'
 import { useLoaderData } from 'react-router-dom'
 import { useObserver } from '@hooks'
@@ -29,27 +22,24 @@ export const MainPage = () => {
 
   type YoutubeDataType = any
 
-  const preLoadData: YoutubeDataType = isProduction
+  const fetchData: YoutubeDataType = isProduction
     ? data?.pages
     : useLoaderData()
 
-  if (isProduction && isLoading) {
+  if (isProduction && error) {
     console.error(error?.message)
   }
 
   return (
     <>
-      <CommonHeader />
-      <MainThumbnail preLoadData={preLoadData} />
-      <MainContent preLoadData={preLoadData} />
-
-      <CommonTopButton />
+      <MainBanner fetchData={fetchData} />
+      <MainContent fetchData={fetchData} />
       {isFetching && <Spinner />}
-      <CommonFooter />
-
       <div
+        className="observer"
         ref={observerRef}
-        style={{ minHeight: '1px' }}></div>
+        style={{ minHeight: '1px' }}
+      />
     </>
   )
 }

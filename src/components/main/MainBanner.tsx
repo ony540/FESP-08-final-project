@@ -17,9 +17,9 @@ interface NextArrowProps {
   onClick?: React.MouseEventHandler<HTMLButtonElement>
 }
 
-export const MainThumbnail = ({ preLoadData }: { preLoadData: any }) => {
+export const MainBanner = ({ fetchData }: { fetchData: any }) => {
   const navigate = useNavigate()
-  const propData = isProduction ? preLoadData : preLoadData.items
+  const propData = isProduction ? fetchData : fetchData.items
 
   const renderContents = () => {
     return isProduction ? (
@@ -27,18 +27,24 @@ export const MainThumbnail = ({ preLoadData }: { preLoadData: any }) => {
         <Slider {...settings}>
           {propData &&
             propData.map((i: any) => {
-              return i.results.slice(0, 5).map((item, index) => (
+              return i.results.slice(5, 11).map((item, index) => (
                 <div key={index}>
-                  {item.snippet.thumbnails.maxres && (
-                    <ThumbnailBoxImg
-                      $height={item.snippet.thumbnails.maxres.height / 1.5}
-                      $image={item.snippet.thumbnails.maxres.url}>
+                  {item.snippet.thumbnails && (
+                    <ThumbnailBox>
+                      <ThumnailImg
+                        src={
+                          item.snippet.thumbnails.maxres
+                            ? item.snippet.thumbnails.maxres.url
+                            : item.snippet.thumbnails.high.url
+                        }
+                        loading="lazy"
+                      />
                       <PlayBtnBox
                         onClick={() => handlePlayButtonClick(item.id)}>
                         <CommonPlayLogo />
                         <PlayBtnText>Play Now</PlayBtnText>
                       </PlayBtnBox>
-                    </ThumbnailBoxImg>
+                    </ThumbnailBox>
                   )}
                 </div>
               ))
@@ -108,6 +114,20 @@ const ThumbnailBoxImg = styled.div<Slide>`
   background-image: ${props => `url(${props.$image})`};
 `
 
+const ThumbnailBox = styled.div`
+  position: relative;
+  border-radius: 8px;
+  width: calc(100% - 100px);
+  margin: 0 auto;
+`
+
+const ThumnailImg = styled.img<Slide>`
+  width: 100%;
+  height: 480px;
+  object-fit: cover;
+  border-radius: 8px;
+`
+
 // PLAY_BUTTON
 const PlayBtnBox = styled.div`
   display: flex;
@@ -128,7 +148,7 @@ const PlayBtnBox = styled.div`
 
 const PlayBtnText = styled.div`
   display: flex;
-  color: ${props => props.theme.main.ft_color_w};
+  color: ${props => props.theme.main.FONT_COLOR_WHITE};
   font-size: 20px;
 `
 

@@ -36,6 +36,7 @@ export const SearchContentCard = ({ i }: { i: RelatedVideoItem }) => {
         {hoveredVideoId === i.id.videoId && (
           <VideoOverlay className="video-overlay">
             <VideoIframe
+              loading="lazy"
               src={`https://www.youtube.com/embed/${i.id.videoId}?autoplay=${
                 hoveredVideoId === i.id.videoId ? 1 : 0
               }&mute=1&controls=0`}

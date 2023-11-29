@@ -2,7 +2,6 @@ import { ERROR_TEXTS } from '../constants'
 import { GlobalStyles } from '@styles'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
-import { CommonFooter, CommonHeader } from '@common'
 
 export const ErrorComponent = () => {
   const navigate = useNavigate()
@@ -10,7 +9,6 @@ export const ErrorComponent = () => {
   return (
     <>
       <GlobalStyles />
-      <CommonHeader />
       <Wrap>
         <ErrorText>
           <ErrorHead>{ERROR_TEXTS.headerText}</ErrorHead>
@@ -21,7 +19,6 @@ export const ErrorComponent = () => {
           </MainMove>
         </ErrorText>
       </Wrap>
-      <CommonFooter />
     </>
   )
 }

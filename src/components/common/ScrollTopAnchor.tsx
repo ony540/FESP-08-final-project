@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { CommonArrow } from '../icons/CommonArrow'
 
-export const CommonTopButton = () => {
+export const ScrollTopAnchor = () => {
   const moveToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }

@@ -10,7 +10,7 @@ interface Truthy {
   $isSearch?: boolean
 }
 
-export const CommonHeader = () => {
+export const Header = () => {
   const [isSearch, setIsSearch] = useState(false)
   const [searchInput, setSearchInput] = useState('')
   const navigate = useNavigate()

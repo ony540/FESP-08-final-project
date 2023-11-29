@@ -52,10 +52,10 @@ const ModalWrapper = styled.article`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: ${({ theme }) => theme.main.ft_color_w};
+  background-color: ${({ theme }) => theme.main.FONT_COLOR_WHITE};
   border-radius: 10px;
   text-align: center;
-  color: ${({ theme }) => theme.main.hr_color_b};
+  color: ${({ theme }) => theme.main.HR_COLOR_BLACK};
 
   p {
     display: inline-block;
@@ -67,7 +67,7 @@ const ModalWrapper = styled.article`
 const ButtonBox = styled.div`
   display: flex;
   height: calc(100% - 61px);
-  border-top: 0.5px solid ${({ theme }) => theme.main.ft_color_g};
+  border-top: 0.5px solid ${({ theme }) => theme.main.FONT_COLOR_GRAY};
   border-radius: 0 0 10px 10px;
 
   button {
@@ -76,7 +76,7 @@ const ButtonBox = styled.div`
   }
 
   button:nth-child(2) {
-    border-left: 0.5px solid ${({ theme }) => theme.main.ft_color_g};
-    color: ${({ theme }) => theme.main.ft_color_r};
+    border-left: 0.5px solid ${({ theme }) => theme.main.FONT_COLOR_GRAY};
+    color: ${({ theme }) => theme.main.FONT_COLOR_RED};
   }
 `
