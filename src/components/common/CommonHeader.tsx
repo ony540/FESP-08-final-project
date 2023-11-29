@@ -57,7 +57,9 @@ export const CommonHeader = () => {
                 onKeyDown={onSearchEnter}
                 maxLength={30}
                 ref={inputRef}
-                onChange={e => setSearchInput(e.target.value)}
+                onChange={e =>
+                  setSearchInput(encodeURIComponent(e.target.value))
+                }
               />
               <SearchBarXWrapper onClick={handleClickSearch}>
                 <CommonXBtn />
