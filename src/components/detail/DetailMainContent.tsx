@@ -1,6 +1,6 @@
 import { CommonShare, CommonWatchList } from '@components/icons'
 import { VideoItem } from '@types'
-import { formatTime } from '@utils'
+import { toYYMMDDSplitedByDot } from '@utils'
 import styled from 'styled-components'
 
 interface DetailMainContentProps {
@@ -26,7 +26,9 @@ export const DetailMainContent = ({
           <TextBox>
             <h2>{detailData?.snippet.title}</h2>
             <h3>{detailData?.snippet.channelTitle}</h3>
-            <time>{formatTime(detailData?.snippet.publishedAt as string)}</time>
+            <time>
+              {toYYMMDDSplitedByDot(detailData?.snippet.publishedAt as string)}
+            </time>
           </TextBox>
           <ButtonList>
             <li>

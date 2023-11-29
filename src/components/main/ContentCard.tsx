@@ -9,6 +9,7 @@ import {
   VideoOverlay
 } from '@styles'
 import { VideoItem } from '@types'
+import { decodeHTMLEntities } from '@utils'
 
 export const ContentCard = ({ data }: { data: VideoItem }) => {
   const navigate = useNavigate()
@@ -36,6 +37,7 @@ export const ContentCard = ({ data }: { data: VideoItem }) => {
         {hoveredVideoId === data.id && (
           <VideoOverlay className="video-overlay">
             <VideoIframe
+              loading="lazy"
               src={`https://www.youtube.com/embed/${data.id}?autoplay=${
                 hoveredVideoId === data.id ? 1 : 0
               }&mute=1&controls=0`}
@@ -45,10 +47,10 @@ export const ContentCard = ({ data }: { data: VideoItem }) => {
         )}
       </ThumbnailBoxImg>
       <ContentCardTitle onClick={() => handleClickItem(data.id)}>
-        {data.snippet.title}
+        {decodeHTMLEntities(data.snippet.title)}
       </ContentCardTitle>
       <ContentCardDescription onClick={() => handleClickItem(data.id)}>
-        {data.snippet.description}
+        {decodeHTMLEntities(data.snippet.description)}
       </ContentCardDescription>
     </ContentCardWrapper>
   )

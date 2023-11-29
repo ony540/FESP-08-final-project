@@ -7,7 +7,7 @@ export const MainContent = ({ preLoadData }: { preLoadData: any }) => {
     return isProduction ? (
       <>
         {preLoadData?.map((data: any) =>
-          data.items.map((item, idx) => (
+          data.results.map((item, idx) => (
             <li key={Date() + idx}>
               <ContentCard data={item} />
             </li>
