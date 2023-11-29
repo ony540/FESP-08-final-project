@@ -3,7 +3,7 @@ import { FOOTER_TEXT } from '@constants'
 import { CommonSocial } from '../icons/CommonSocial'
 import { CommonLogo } from '../icons/CommonLogo'
 
-export const CommonFooter = () => {
+export const Footer = () => {
   const renderRowText = () => {
     return (
       <FlexRow>

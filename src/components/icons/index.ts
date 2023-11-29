@@ -1,6 +1,6 @@
 export * from '../icons/CommonLogo'
 export * from '../icons/CommonSocial'
-export * from '../common/CommonTopButton'
+export * from '../common/ScrollTopAnchor'
 export * from '../icons/CommonPlayLogo'
 export * from '../icons/CommonSearch'
 export * from '../icons/CommonXBtn'

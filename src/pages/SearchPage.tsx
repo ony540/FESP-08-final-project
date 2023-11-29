@@ -1,4 +1,4 @@
-import { CommonHeader, ContentCard, Spinner } from '@components'
+import { ContentCard, Spinner } from '@components'
 import { IsNotSearched, SearchContentCard } from '@components/search'
 import { useObserver } from '@hooks'
 import { ContentWrap } from '@styles'
@@ -118,10 +118,5 @@ export const SearchPage = () => {
     )
   }
 
-  return (
-    <>
-      <CommonHeader />
-      {isProduction ? renderContents() : renderDevelopContents()}
-    </>
-  )
+  return <>{isProduction ? renderContents() : renderDevelopContents()}</>
 }

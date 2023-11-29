@@ -4,7 +4,7 @@ import {
   DetailRelatedList,
   Spinner
 } from '@components'
-import { CommonFooter, CommonHeader, CommonTopButton } from '@components/common'
+
 import {
   RelatedVideoItem,
   RelatedVideoListResponse,
@@ -79,7 +79,6 @@ export const DetailPage = () => {
 
   return (
     <>
-      <CommonHeader />
       <DetailMainContent
         detailData={isProduction ? detailDatafromQuery : detailData}
         id={id}
@@ -88,8 +87,6 @@ export const DetailPage = () => {
         relatedData={isProduction ? relatedDatafromQuery : relatedData}
       />
       <CommentsBox videoId={id} />
-      <CommonFooter />
-      <CommonTopButton />
     </>
   )
 }

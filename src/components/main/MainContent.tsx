@@ -2,11 +2,11 @@ import { ContentWrap, ListTitle } from '@styles'
 import { ContentCard } from './ContentCard'
 import { isProduction } from '@utils'
 
-export const MainContent = ({ preLoadData }: { preLoadData: any }) => {
+export const MainContent = ({ fetchData }: { fetchData: any }) => {
   const renderContents = () => {
     return isProduction ? (
       <>
-        {preLoadData?.map((data: any) =>
+        {fetchData?.map((data: any) =>
           data.results.map((item, idx) => (
             <li key={Date() + idx}>
               <ContentCard data={item} />
@@ -16,7 +16,7 @@ export const MainContent = ({ preLoadData }: { preLoadData: any }) => {
       </>
     ) : (
       <>
-        {preLoadData?.items.map((item, idx) => (
+        {fetchData?.items.map((item, idx) => (
           <li key={Date() + idx}>
             <ContentCard data={item} />
           </li>

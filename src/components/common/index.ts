@@ -1,4 +1,4 @@
-export * from './CommonFooter'
-export * from './CommonHeader'
-export * from './CommonTopButton'
+export * from './Footer'
+export * from './Header'
+export * from './ScrollTopAnchor'
 export * from './DarkModeButton'

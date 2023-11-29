@@ -1,3 +1,3 @@
 export * from './MainContent'
-export * from './MainThumbnail'
+export * from './MainBanner'
 export * from './ContentCard'
