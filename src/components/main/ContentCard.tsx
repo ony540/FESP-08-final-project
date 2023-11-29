@@ -36,6 +36,7 @@ export const ContentCard = ({ data }: { data: VideoItem }) => {
         {hoveredVideoId === data.id && (
           <VideoOverlay className="video-overlay">
             <VideoIframe
+              loading="lazy"
               src={`https://www.youtube.com/embed/${data.id}?autoplay=${
                 hoveredVideoId === data.id ? 1 : 0
               }&mute=1&controls=0`}

@@ -1,4 +1,4 @@
-import { CommonHeader, ContentCard } from '@components'
+import { CommonHeader, ContentCard, Spinner } from '@components'
 import { IsNotSearched, SearchContentCard } from '@components/search'
 import { useObserver } from '@hooks'
 import { ContentWrap } from '@styles'
@@ -31,7 +31,7 @@ export const SearchPage = () => {
   // 개발모드 로직
   useEffect(() => {
     if (!isProduction) {
-      const filteredItems = preLoadData?.filter((item: any) => {
+      const filteredItems = preLoadData?.items.filter((item: any) => {
         const loadedTitle = item.snippet.title.replace(/\s/g, '').toLowerCase()
         const searchQuery = detailId?.replace(/\s/g, '').toLowerCase()
         return loadedTitle.includes(searchQuery)
@@ -62,7 +62,7 @@ export const SearchPage = () => {
   // 배포모드 로직
   const { data, isLoading, error, fetchNextPage, hasNextPage } =
     useInfiniteQuery({
-      queryKey: ['searched-data'],
+      queryKey: ['searched-data', detailId],
       queryFn: () =>
         getSearchedVideo({
           searchInput: detailId,
@@ -84,9 +84,12 @@ export const SearchPage = () => {
 
   const observerRef = useObserver(hasNextPage, fetchNextPage, isLoading)
 
-  if (isLoading) {
-    return <p>Lodaing...</p>
-  }
+  if (isLoading)
+    return (
+      <div style={{ display: 'flex', alignItems: 'center', height: '100vh' }}>
+        <Spinner />
+      </div>
+    )
 
   if (error) {
     return <p>{error.message}</p>

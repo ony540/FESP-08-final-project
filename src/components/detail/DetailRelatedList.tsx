@@ -1,6 +1,6 @@
 import { useSwipe } from '@hooks'
 import { RelatedVideoItem } from '@types'
-import { formatTime } from '@utils'
+import { toYYMMDDSplitedByDot } from '@utils'
 import { useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import styled from 'styled-components'
@@ -57,7 +57,7 @@ export const DetailRelatedList = ({ relatedData }: DetailRelatedListProps) => {
                   {item.snippet.channelTitle} •
                   <time>
                     {' '}
-                    {formatTime(item.snippet.publishedAt.toString())}
+                    {toYYMMDDSplitedByDot(item.snippet.publishedAt.toString())}
                   </time>
                 </p>
               </ThumbnailBoxText>

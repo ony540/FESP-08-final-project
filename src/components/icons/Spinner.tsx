@@ -11,9 +11,9 @@ export const Spinner = () => {
     <svg
       xmlns="http://www.w3.org/2000/svg"
       style={spinnerStyle}
-      width="200px"
+      width="100px"
       height="100px"
-      viewBox="0 0 50 100"
+      viewBox="0 0 100 100"
       preserveAspectRatio="xMidYMid">
       <defs>
         <clipPath

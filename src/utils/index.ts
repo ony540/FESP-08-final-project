@@ -1,3 +1,3 @@
-export * from './formatTime'
+export * from './toYYMMDDSplitedByDot'
 export * from './getRandomColor'
 export * from './isProduction'

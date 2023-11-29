@@ -1,4 +1,9 @@
-import { CommentsBox, DetailMainContent, DetailRelatedList } from '@components'
+import {
+  CommentsBox,
+  DetailMainContent,
+  DetailRelatedList,
+  Spinner
+} from '@components'
 import { CommonFooter, CommonHeader, CommonTopButton } from '@components/common'
 import {
   RelatedVideoItem,
@@ -50,7 +55,7 @@ export const DetailPage = () => {
     const fetchDataDevelop = async () => {
       const filteredData = state
         ? state
-        : preLoadData.find((item: VideoItem) => item.id === id)
+        : preLoadData.items.find((item: VideoItem) => item.id === id)
       setDetailData(filteredData)
 
       const relatedJson = await fetch(
@@ -65,7 +70,12 @@ export const DetailPage = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }, [id])
 
-  if (isdetailLoading || isRelatedLoading) return <h3>로딩중</h3>
+  if (isdetailLoading || isRelatedLoading)
+    return (
+      <div style={{ display: 'flex', alignItems: 'center', height: '100vh' }}>
+        <Spinner />
+      </div>
+    )
 
   return (
     <>

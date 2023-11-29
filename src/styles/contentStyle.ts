@@ -153,6 +153,8 @@ export const VideoOverlay = styled.div`
   justify-content: center;
   align-items: center;
   border-radius: 8px;
+  border-top-right-radius: 8px;
+  border-top-left-radius: 8px;
 `
 
 export const VideoIframe = styled.iframe`

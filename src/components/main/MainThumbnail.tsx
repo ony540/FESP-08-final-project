@@ -6,7 +6,7 @@ import 'slick-carousel/slick/slick-theme.css'
 import { useNavigate } from 'react-router-dom'
 import { CommonArrow, CommonPlayLogo } from '@components/icons'
 import { isProduction } from '@utils'
-import { VideoItem, VideoListResponse } from '@types'
+import { VideoItem } from '@types'
 
 interface Slide {
   $image?: string
@@ -26,8 +26,8 @@ export const MainThumbnail = ({ preLoadData }: { preLoadData: any }) => {
       <>
         <Slider {...settings}>
           {propData &&
-            propData.map((i: VideoListResponse) => {
-              return i.items.slice(0, 5).map((item, index) => (
+            propData.map((i: any) => {
+              return i.results.slice(0, 5).map((item, index) => (
                 <div key={index}>
                   {item.snippet.thumbnails.maxres && (
                     <ThumbnailBoxImg

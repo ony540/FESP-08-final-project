@@ -1,4 +1,4 @@
-export const formatTime = (timeString: string): string | null => {
+export const toYYMMDDSplitedByDot = (timeString: string): string | null => {
   const date = new Date(timeString)
 
   const year = date.getFullYear()
