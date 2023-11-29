@@ -1,6 +1,6 @@
 import { baseInstance } from '@API'
 
-const apiKey = process.env.REACT_APP_YOUTUBE_API
+const apiKey = process.env.REACT_APP_YOUTUBE_API_KEY
 
 export const getSearchedVideo = async ({
   searchInput,
