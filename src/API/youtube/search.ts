@@ -7,11 +7,11 @@ export const getSearchedVideo = async ({
   nextPageToken
 }: {
   searchInput: string
-  nextPageToken: string | null
+  nextPageToken: string
 }) => {
   try {
     const res = await baseInstance(
-      `search?part=snippet&maxResults=12&q=${searchInput}&key=${apiKey}&pageToken=${nextPageToken}`
+      `search?part=snippet&maxResults=12&pageToken=${nextPageToken}&key=${apiKey}&q=${searchInput}`
     )
     return res.data
   } catch (error) {

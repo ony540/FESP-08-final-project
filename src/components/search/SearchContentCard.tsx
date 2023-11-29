@@ -7,6 +7,7 @@ import {
   VideoOverlay
 } from '@styles'
 import { RelatedVideoItem } from '@types'
+import { decodeHTMLEntities } from '@utils'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -44,10 +45,10 @@ export const SearchContentCard = ({ i }: { i: RelatedVideoItem }) => {
         )}
       </ThumbnailBoxImg>
       <ContentCardTitle onClick={() => moveToDetail(i.id.videoId)}>
-        {i.snippet.title}
+        {decodeHTMLEntities(i.snippet.title)}
       </ContentCardTitle>
       <ContentCardDescription onClick={() => moveToDetail(i.id.videoId)}>
-        {i.snippet.description}
+        {decodeHTMLEntities(i.snippet.description)}
       </ContentCardDescription>
     </ContentCardWrapper>
   )
