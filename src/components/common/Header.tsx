@@ -11,38 +11,105 @@ interface Truthy {
 }
 
 export const Header = () => {
-  const [isSearch, setIsSearch] = useState(false)
-  const [searchInput, setSearchInput] = useState('')
+  const [isSearchToggle, setIsSearchToggle] = useState<boolean>(false)
+  const [searchInput, setSearchInput] = useState<string>('')
   const navigate = useNavigate()
   const inputRef = useRef<HTMLInputElement>(null)
 
-  const moveToMain = () => {
+  // 최종본 이후 최근 검색어 로직 추가
+  const [pastSearchQueries, setPastSearchQueries] = useState<string[]>([])
+  const [isDropdownToggle, setIsDropdownToggle] = useState<boolean>(false)
+  const storedQueries = localStorage.getItem('searchQueries')
+  const headerRef = useRef<HTMLDivElement>(null)
+
+  const handleNavigateToMain = () => {
     navigate('/')
   }
 
+  const handleNavigateToResults = (query: string) => {
+    navigate({
+      pathname: '/results',
+      search: `?search_query=${query}`
+    })
+    setSearchInput('')
+    setIsDropdownToggle(false)
+  }
+
   const handleClickSearch = () => {
-    setIsSearch(!isSearch)
+    setIsSearchToggle(!isSearchToggle)
+    storedQueries ? setIsDropdownToggle(true) : setIsDropdownToggle(false)
   }
 
   const onSearchEnter = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
-      navigate({
-        pathname: '/results',
-        search: `?search_query=${searchInput}`
-      })
+      if (!searchInput) return
+      // 이동 로직
+      handleNavigateToResults(searchInput)
+
+      // 저장 로직
+      const newQuery = searchInput
+      const storedQueries = localStorage.getItem('searchQueries') as string
+      const queries = JSON.parse(storedQueries) || []
+      const updatedQueries = [...queries, newQuery].sort((a, b) => b - a)
+      localStorage.setItem('searchQueries', JSON.stringify(updatedQueries))
+      setPastSearchQueries(updatedQueries)
+      setIsSearchToggle(false)
     }
   }
 
+  // get item from localstorage
   useEffect(() => {
     inputRef.current?.focus()
-  }, [isSearch])
+    if (isSearchToggle && storedQueries) {
+      const decodedQueries = JSON.parse(storedQueries).map((query: string) =>
+        decodeURIComponent(query)
+      )
+      setPastSearchQueries(decodedQueries)
+    }
+  }, [isSearchToggle])
+
+  // delete-none
+  const handleDeleteSearchQuery = (index: number) => {
+    const updatedQueries = [...pastSearchQueries]
+    updatedQueries.splice(index, 1)
+    localStorage.setItem('searchQueries', JSON.stringify(updatedQueries))
+    setPastSearchQueries(updatedQueries)
+  }
+
+  // delete-all
+  const handleDeleteSearchQueryAll = () => {
+    localStorage.removeItem('searchQueries')
+    setPastSearchQueries([])
+  }
+
+  useEffect(() => {
+    /** mouse event 뷰포트 클릭시 서치 바 닫는 용도 */
+    const handleClickOutside = event => {
+      if (
+        headerRef.current &&
+        !headerRef.current.contains(event.target as Node)
+      ) {
+        setIsSearchToggle(false)
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside)
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [headerRef])
+
+  console.log(searchInput)
 
   return (
-    <HeaderContainer $isSearch={isSearch}>
+    <HeaderContainer
+      $isSearch={isSearchToggle}
+      ref={headerRef}>
       {/* 메인 아이콘 */}
       <LogoIconWrapper
-        onClick={moveToMain}
-        $isSearch={isSearch}>
+        onClick={handleNavigateToMain}
+        $isSearch={isSearchToggle}>
         <CommonLogo
           width={130}
           height={50}
@@ -51,9 +118,10 @@ export const Header = () => {
 
       {
         <>
-          {isSearch ? (
+          {isSearchToggle ? (
             <SearchBarWrapper>
               <StyledInput
+                onClick={() => setIsDropdownToggle(!isDropdownToggle)}
                 onKeyDown={onSearchEnter}
                 maxLength={30}
                 ref={inputRef}
@@ -61,8 +129,43 @@ export const Header = () => {
                   setSearchInput(encodeURIComponent(e.target.value))
                 }
               />
+              {isDropdownToggle && (
+                <DropdownContainer>
+                  {pastSearchQueries.length > 0 && (
+                    <NoticeContainer>
+                      <span>최근 검색어</span>
+                      <DeleteAllButton onClick={handleDeleteSearchQueryAll}>
+                        전체삭제
+                      </DeleteAllButton>
+                    </NoticeContainer>
+                  )}
+                  {pastSearchQueries.map((query, index) => (
+                    <DropdownItem
+                      key={index}
+                      onClick={() => {
+                        setSearchInput(query)
+                      }}>
+                      <div
+                        className="navigate-div"
+                        onClick={() => handleNavigateToResults(query)}>
+                        {query}
+                      </div>
+                      <DeleteNone
+                        onClick={() => handleDeleteSearchQuery(index)}>
+                        <CommonXBtn
+                          size={18}
+                          isBlack={true}
+                        />
+                      </DeleteNone>
+                    </DropdownItem>
+                  ))}
+                </DropdownContainer>
+              )}
               <SearchBarXWrapper onClick={handleClickSearch}>
-                <CommonXBtn />
+                <CommonXBtn
+                  size={28}
+                  isBlack={true}
+                />
               </SearchBarXWrapper>
             </SearchBarWrapper>
           ) : (
@@ -109,6 +212,7 @@ const HeaderContainer = styled.div<Truthy>`
   justify-content: space-between;
   align-items: center;
   position: relative;
+  z-index: 1;
 
   @media screen and (max-width: 585px) {
     height: 76.5px;
@@ -177,4 +281,77 @@ const StyledInput = styled.input<Truthy>`
   box-shadow:
     0 3px 6px rgba(255, 255, 255, 0.16),
     0 3px 6px rgba(255, 255, 255, 0.23);
+`
+
+// 추가
+
+const DropdownContainer = styled.div`
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  top: 36px;
+  right: 0;
+  width: 100%;
+  overflow-y: auto;
+  background-color: #fff;
+  color: #000;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  z-index: 999;
+`
+
+// DROPDOWN ITEM
+const DropdownItem = styled.div`
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  justify-content: space-around;
+  align-items: center;
+  font-size: ${p => p.theme.customSize.medium};
+
+  &:hover {
+    background-color: #eee;
+  }
+
+  .navigate-div {
+    width: calc(100% - 80px);
+    padding: 12px;
+    margin-right: 30px;
+  }
+`
+
+const DeleteNone = styled.div`
+  cursor: pointer;
+
+  &:hover {
+    scale: calc(1.1);
+  }
+`
+
+const NoticeContainer = styled.div`
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  & span {
+    margin-left: 12px;
+    font-size: ${p => p.theme.customSize.small};
+    color: ${p => p.theme.main.FONT_COLOR_GRAY};
+  }
+`
+
+const DeleteAllButton = styled.div`
+  font-size: ${p => p.theme.customSize.medium};
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 60px;
+  height: 32px;
+  color: ${p => p.theme.main.HR_COLOR_BLACK};
+
+  &:hover {
+    cursor: pointer;
+    color: ${p => p.theme.main.FONT_COLOR_PINK};
+  }
 `

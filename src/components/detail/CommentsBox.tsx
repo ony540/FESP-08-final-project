@@ -132,7 +132,7 @@ export const CommentsBox = ({ videoId }: { videoId: string }) => {
             <CommentDeleteBtn
               type="button"
               onClick={() => handleDeleteModalOpen(comment.id)}>
-              <CommonXBtn isSmall={true} />
+              <CommonXBtn size={24} />
             </CommentDeleteBtn>
           </CommentWrap>
         ))}
