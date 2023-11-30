@@ -29,7 +29,7 @@ const generateRoute = (
 
 export const routes = [
   {
-    path: '/fesp-08-final-project/',
+    path: '/',
     element: <Layout />,
     children: [
       generateRoute('/', <MainPage />),
