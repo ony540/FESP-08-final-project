@@ -62,59 +62,59 @@
 #### 1주차
 
 - 여러 팀원이 일한다는 생각으로 동일한 코드 스타일 작성 할 수 있는 환경을 만들어주세요.
-  - [ ] lint, prettier 설정
-  - [ ] import 파일 경로는 절대 경로로 설정해주세요.
-  - [ ] config 설정
-  - [ ] 제공되는 비디오 데이터를 사용해주세요.
+  - [x] lint, prettier 설정
+  - [x] import 파일 경로는 절대 경로로 설정해주세요.
+  - [x] config 설정
+  - [x] 제공되는 비디오 데이터를 사용해주세요.
 - 영상 목록 페이지
-  - [ ] `popular.json` 파일을 사용해서 만들어주세요.
+  - [x] `popular.json` 파일을 사용해서 만들어주세요.
 - 영상 상세 페이지
-  - [ ] 채널의 관련 영상들은 `searchByChannels` 폴더의 파일을 사용해서 만들어주세요.
+  - [x] 채널의 관련 영상들은 `searchByChannels` 폴더의 파일을 사용해서 만들어주세요.
 - 데이터에 대한 정보는 유튜브 api 문서를 참고하세요.
-  - [ ] [/videos](https://developers-dot-devsite-v2-prod.appspot.com/youtube/v3/docs/videos/list?hl=ko)
-  - [ ] [/search?channelId={id}](https://developers-dot-devsite-v2-prod.appspot.com/youtube/v3/docs/search/list?hl=ko)
+  - [/videos](https://developers-dot-devsite-v2-prod.appspot.com/youtube/v3/docs/videos/list?hl=ko)
+  - [/search?channelId={id}](https://developers-dot-devsite-v2-prod.appspot.com/youtube/v3/docs/search/list?hl=ko)
 - [아래 예시 화면](https://www.notion.so/1-5d096fba2f974a478eaa21a4af1cc5e3?pvs=21)을 참고해서 화면을 제작해주세요.
   - 꼭 동일하게 제작하지 않아도 됩니다.
   - 모든 디자인은 자유롭게 구성 가능하며, 스타일 관련 라이브러리는 자유롭게 선택해주세요.
 
 #### 2주차
 
-- [ ] 다크 모드를 적용해주세요.
-- [ ] 애니메이션 효과를 넣어주세요.(ex. 넥플릭스, 왓차 등등)
-- [ ] 댓글 API는 supabase를 사용합니다.
+- [x] 다크 모드를 적용해주세요.
+- [x] 애니메이션 효과를 넣어주세요.(ex. 넥플릭스, 왓차 등등)
+- [x] 댓글 API는 supabase를 사용합니다.
 
 #### 3주차
 
-- [ ] 운영서버(YOUTUBVE)인지 또는 개발서버(json 데이터)에 따라서 실제 youtube API를 사용해서 만들어주세요. (환경변수에 따라 분기처리 ~~IS_DEV~~ , IS_YOUTUBE_API)
-- [ ] supabase 또한 비슷한 방식으로 처리해주세요. DEV DB와 PROD DB를 나누어주세요.
-- [ ] 코드 리팩토링를 진행해주세요.
+- [x] 운영서버(YOUTUBVE)인지 또는 개발서버(json 데이터)에 따라서 실제 youtube API를 사용해서 만들어주세요. (환경변수에 따라 분기처리 ~~IS_DEV~~ , IS_YOUTUBE_API)
+- [x] supabase 또한 비슷한 방식으로 처리해주세요. DEV DB와 PROD DB를 나누어주세요.
+- [x] 코드 리팩토링를 진행해주세요.
 
 ### 5. 필수 구현 기능
 
 #### 1주차
-- [ ] 사용자는 비디오 목록을 확인할 수 있다.
-- [ ] 사용자는 영상을 클릭하면, 해당 영상의 상세 화면으로 이동할 수 있다.
-- [ ] 사용자는 비디오 상세 정보를 확인할 수 있다.
-- [ ] 사용자는 관련 비디오 목록을 확인할 수 있다.
-- [ ] 사용자는 mobile, tablet, pc 환경에서 사용할 수 있다.
+- [x] 사용자는 비디오 목록을 확인할 수 있다.
+- [x] 사용자는 영상을 클릭하면, 해당 영상의 상세 화면으로 이동할 수 있다.
+- [x] 사용자는 비디오 상세 정보를 확인할 수 있다.
+- [x] 사용자는 관련 비디오 목록을 확인할 수 있다.
+- [x] 사용자는 mobile, tablet, pc 환경에서 사용할 수 있다.
 
 #### 2주차
 
 - 영화 목록 페이지
 - 사용자는 원하는 영화를 검색할 수 있어요.
-  - [ ] popular.json의 title 기준으로 검색이 가능합니다.
-  - [ ] 뒤로가기 시, 영화 검색 내용이 초기화가 되면 안돼요.
+  - [x] popular.json의 title 기준으로 검색이 가능합니다.
+  - [x] 뒤로가기 시, 영화 검색 내용이 초기화가 되면 안돼요.
 - 영화 상세 페이지
 - 사용자는 관련 영상 목록이 많아 스크롤하기 불편해요.
-  - [ ] 관련 영상 목록을 편하게 볼수 있도록 개선해주세요.
+  - [x] 관련 영상 목록을 편하게 볼수 있도록 개선해주세요.
 
 #### 3주차
 
-- [ ] 사용자에게 UX를 개선하는 로딩 화면/에러 화면을 보여주세요.<br/> [배민서비스 참고](https://www.baemin.com/adafadf)
-- [ ] 사용자는 모든 데이터를 한번에 보는게 아니라, 스크롤을 할 때마다 데이터를 볼 수 있습니다.
+- [x] 사용자에게 UX를 개선하는 로딩 화면/에러 화면을 보여주세요.<br/> [배민서비스 참고](https://www.baemin.com/adafadf)
+- [x] 사용자는 모든 데이터를 한번에 보는게 아니라, 스크롤을 할 때마다 데이터를 볼 수 있습니다.
   - 대신, [이 라이브러리](https://www.npmjs.com/package/react-intersection-observer)를 사용하지 않고 직접 구현합니다.
-- [ ] 사용자가 보는 화면에서만 이미지가 로드 되어야 합니다.
-  - [ ] 스크롤 마다 보여지는 새 영역에서만 이미지가 로드됩니다.
+- [x] 사용자가 보는 화면에서만 이미지가 로드 되어야 합니다.
+- [x] 스크롤 마다 보여지는 새 영역에서만 이미지가 로드됩니다.
 
 ### 💻 6. 역할 분담
 
@@ -214,11 +214,10 @@
   </br>
   </br>
 
-##### error 페이지
+##### 404 페이지 및 검색어 없을시 노출 되는 페이지
 
 <img src="https://github.com/FESP-8/final-project/assets/115642699/9b89217c-3dbc-49dd-98e9-d6bb5da3b7a3" width="600"></br>
 
-- 404 페이지 구현 </br>
 
 </br>
 </br>
