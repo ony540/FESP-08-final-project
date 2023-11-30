@@ -1,5 +1,6 @@
 {
-  "name": "my-app",
+  "homepage": "https://ony540.github.io/FESP-08-final-project",
+  "name": "fesp-08-final-project",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -14,6 +15,7 @@
     "@types/styled-components": "^5.1.30",
     "dotenv": "^16.3.1",
     "env-cmd": "^10.1.0",
+    "gh-pages": "^6.1.0",
     "react": "^18.2.0",
     "react-app-rewired": "^2.2.1",
     "react-dom": "^18.2.0",
@@ -30,11 +32,13 @@
   },
   "scripts": {
     "start": "env-cmd -f .env.development craco start",
-    "build:prod": "craco build",
+    "build": "craco build",
     "build:dev": "env-cmd -f .env.development craco build",
     "test": "craco test",
     "prod": "env-cmd -f .env.production craco start",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
